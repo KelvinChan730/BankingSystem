@@ -7,7 +7,8 @@ public class SavingInterestCalculator implements InterestCalculator{
     public BigDecimal getInterest(BigDecimal balance) {
         BigDecimal interest;
 
-        // 적금 계좌의 경우 잔액이 100만원 이상은 이자율이 50%, 그 외에는 1% 입니다.
+        // For a savings account, the interest rate is 50% 
+        // for balances over 1 million won and 1% otherwise.
         if(balance.compareTo(BigDecimal.valueOf(1000000)) >= 0)
             interest = BigDecimal.valueOf(0.5);
         else

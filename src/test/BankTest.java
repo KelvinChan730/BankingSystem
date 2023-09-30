@@ -17,14 +17,14 @@ public class BankTest {
     public static void main(String[] args) {
 
         CentralBank centralBank = CentralBank.getInstance();
-        // 예금 계좌와 적금 계좌 생성
+        // Create savings and savings accounts
         Bank bank = new Bank();
         SavingBank bank2 = new SavingBank();
         ArrayList<Account> accountList = new ArrayList<>();
         boolean isSetUp = true;
         while(true){
             try {
-                System.out.println("---일반 예금 계좌를 생성합니다.---");
+                System.out.println("---Create a regular savings account.---");
                 accountList.add(bank.createAccount());
                 isSetUp = true;
                 break;
@@ -35,7 +35,7 @@ public class BankTest {
         }
         while(true){
             try {
-                System.out.println("---적금 계좌를 생성합니다.---");
+                System.out.println("---Create a savings account.---");
                 accountList.add(bank2.createAccount());
                 isSetUp = true;
                 break;
@@ -47,7 +47,7 @@ public class BankTest {
         centralBank.setAccountList(accountList);
         while (isSetUp) {
             try {
-                System.out.println("\n1. 계좌 목록 | 2. 출금 | 3. 입금 | 4. 송금 | 5. 종료");
+                System.out.println("\n1. account list | 2. withdrawals | 3. deposits | 4. transfers | 5. exit");
                 int menuNo = scanner.nextInt();
                 switch (menuNo) {
                     case 1:
@@ -70,12 +70,12 @@ public class BankTest {
                         break;
                 }
             }catch (InputMismatchException ie){
-                System.out.println(new MenuInputException("1~5까지의 숫자만 입력해주세요.").getMessage());
+                System.out.println(new MenuInputException("Please enter only numbers from 1 to 5.").getMessage());
                 scanner.next();
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
         }
-        System.out.println("뱅킹 프로그램을 종료합니다.");
+        System.out.println("Exit the banking program.");
     }
 }

@@ -12,8 +12,8 @@ import java.util.NoSuchElementException;
 public class SavingBank extends Bank {
 
     public void withdraw(SavingAccount account) throws WithdrawException{
-        // Account의 출금 메서드를 조금 다르게 구현
-        BigDecimal goalAmount = account.getGoalAmount();
+        // Account’s withdrawal method is implemented a little differently.
+        BigDecimal goalAmount = account.getTargetAmount();
         if(account.getBalance().compareTo(goalAmount) < 0){
             throw new WithdrawException(String.format(ErrCode.E104.getErrMsg(), df.format(goalAmount)));
         }
@@ -21,15 +21,15 @@ public class SavingBank extends Bank {
     @Override
     public SavingAccount createAccount() throws InputMismatchException {
         try{
-            // 계좌번호 채번
-            // 계좌번호는 "0000"+증가한 seq 포맷을 가진 번호입니다.
+        	// Account number
+            // The account number is a number in the format "0000" + incremented seq.
             String accNo = String.format(new DecimalFormat("0000").format(++seq));
-            String owner = askInput("\n소유주명을 입력해주세요.", "");
-            BigDecimal amount = askInput("\n최초 입금액을 입력해주세요.", BigDecimal.ZERO);
-            BigDecimal goalAmount = askInput("\n목표 금액을 입력해주세요.", BigDecimal.ZERO);
+            String owner = askInput("\nPlease enter the owner's name.", "");
+            BigDecimal amount = askInput("\nPlease enter your initial deposit amount.", BigDecimal.ZERO);
+            BigDecimal goalAmount = askInput("\nPlease enter a target amount.", BigDecimal.ZERO);
             SavingAccount account = new SavingAccount(accNo, owner, amount, goalAmount);
             CentralBank.getInstance().getAccountList().add(new SavingAccount(accNo, owner, amount, goalAmount));
-            System.out.printf("%s님 계좌가 발급되었습니다.", owner);
+            System.out.printf("Your account has been issued for %s.", owner);
             return account;
         }catch (InputMismatchException ime){
             if(seq > 0) seq--;

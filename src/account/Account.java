@@ -8,15 +8,16 @@ import exceptions.funcException.WithdrawException;
 import java.math.BigDecimal;
 
 public class Account {
-    // 일반 계좌 클래스의 속성은 계좌종류(N: 예금계좌, S:적금계좌), 계좌번호, 소유자, 잔액, 활성화 여부 5가지 입니다.
-    protected String category;         // 계좌 종류
-    protected String accNo;              // 계좌번호
-    protected String owner;              // 소유자
-    protected BigDecimal balance;        // 잔액
-    protected boolean isActive;          // 활성화 여부
+    // The general account class has five attributes:
+    protected String category;			// account type (N: deposit account, S: savings account)
+    protected String accNo;				// account number
+    protected String owner;				// owner
+    protected BigDecimal balance;		// balance
+    protected boolean isActive;			// activation status
 
+    // Sets whether normal accounts are enabled to True
+	// and the account type to "N" (meaning NORMAL).
     public Account() {
-        // 일반 계좌의 활성화 여부를 True로, 계좌 종류를 "N"(NORMAL을 의미) 설정해줍니다.
         isActive = true;
         category = "N";
     }
@@ -27,7 +28,7 @@ public class Account {
         this.balance = balance;
     }
 
-    // 일반 계좌 클래스의 각 속성에 getter/setter를 제공합니다.
+    // Getter/setter for each property of the generic account class.
     public String getAccNo() {
         return accNo;
     }
@@ -64,15 +65,15 @@ public class Account {
         this.category = category;
     }
 
+	// Print the basic information of the account.
     public void getAccountInfo(){
-        // 계좌의 기본 정보를 아래 형태로 출력해줍니다.
-        // 계좌종류: %s | 계좌번호: %s | 계좌주명: %s | 잔액: %s원
-        System.out.printf("계좌종류: %s | 계좌번호: %s | 계좌주명: %s | 잔액: %s원\n",
+        System.out.printf("Account type: %s | Account number: %s | Account holder: %s | Balance: %s원\n",
                 category, accNo, owner, Bank.df.format(balance));
     }
+    
 
+	// Withdraw an amount of money
     public BigDecimal withdraw(BigDecimal amount) throws WithdrawException {
-        // 출금액을 받아서 출금하는 기본 메소드입니다. this를 이용해 구현해보세요.
         if(this.balance.compareTo(amount) < 0){
             throw new WithdrawException("잔액이 모자랍니다.");
         }else{
@@ -81,6 +82,7 @@ public class Account {
         return amount;
     }
 
+	// Deposit an amount of money
     public BigDecimal deposit(BigDecimal amount) throws DepositException {
         try {
             this.balance = this.balance.add(amount);

@@ -7,8 +7,8 @@ public class BasicInterestCalculator implements InterestCalculator{
     public BigDecimal getInterest(BigDecimal balance) {
         BigDecimal interest;
 
-        // 예금 계좌의 경우 잔액이 1000만원 이상은 이자율이 50%,
-        //  500만원 이상은 7%, 100만원 이상은 4%, 1만원 이상은 2%, 그 외에는 1% 입니다.
+        // For deposit accounts, the interest rate is 50% for balances over 10 million won,
+        // 7% for 500 million won, 4% for 100 million won, 2% for 1 million won, and 1% for everything else.
         if(balance.compareTo(BigDecimal.valueOf(10000000))>=0)
             interest = BigDecimal.valueOf(0.5);
         else if(balance.compareTo(BigDecimal.valueOf(5000000))>=0)
