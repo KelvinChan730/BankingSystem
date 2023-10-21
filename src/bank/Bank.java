@@ -2,7 +2,6 @@ package bank;
 
 import account.Account;
 import account.AccountList;
-import exceptions.funcException.UnknownException;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -66,18 +65,5 @@ public class Bank {
 		BigDecimal parsedAmount = new BigDecimal(Double.parseDouble(amount));
 		AccountList.addAccount(new Account(accNo, name, parsedAmount, password));
 		return true;
-	}
-
-	// Method to find and return a list of accounts
-	public Account findAccount(String accNo) throws UnknownException {
-		Account account = null;
-		for (Account value : CentralBank.getInstance().getAccountList().getList()) {
-			if (value.getAccNo().equals(accNo) && value.isActive()) {
-				account = value;
-			}
-		}
-		if (account == null)
-			throw new UnknownException("The account does not exist.");
-		return account;
 	}
 }

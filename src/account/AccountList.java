@@ -1,13 +1,23 @@
 package account;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AccountList {
-	private static ArrayList<Account> bankAccountList = new ArrayList<>();
-	public static void addAccount(Account account) {
-		bankAccountList.add(account);
+	private static HashMap<String, Account> accountList = new HashMap<>();
+
+	public static HashMap<String, Account> getList() {
+		return accountList;
 	}
-	public static ArrayList<Account> getList() {
-		return bankAccountList;
+	
+	// add account
+	public static void addAccount(Account account) {
+		accountList.put(account.accNo, account);
+	}
+	
+	// find account by account number
+	public static Account findAccount(String accNo) {
+		if (accountList.containsKey(accNo))
+			return accountList.get(accNo);
+		return null;
 	}
 }
