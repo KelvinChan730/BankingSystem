@@ -1,7 +1,5 @@
 package account;
 
-import java.math.BigDecimal;
-
 import bank.Bank;
 import constant.Currency;
 

@@ -3,6 +3,7 @@ package bank;
 import account.Account;
 import account.AccountList;
 import account.ForeignCurrencyAccount;
+import account.SavingAccount;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -73,6 +74,13 @@ public class Bank {
 		BigDecimal transferAccBalance = transferAcc.getBalance();
 		if (transferAccBalance.compareTo(amount) < 0 || amount.compareTo(BigDecimal.ZERO) <= 0)
 			return false;
+		
+		BigDecimal reducedBalance = transferAccBalance.subtract(amount);
+
+		// check if saving account eligible for transfer
+		if (transferAcc.getCategory() == "S" && ((SavingAccount)transferAcc).getTargetAmount().compareTo(reducedBalance) > 0) {
+			return false;
+		}
 		
 		transferAcc.setBalance(transferAccBalance.subtract(amount));
 		BigDecimal amountHKD = amount.multiply(transferAcc.getCurrencyType().getExchangeRate());
