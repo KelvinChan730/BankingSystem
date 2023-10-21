@@ -14,6 +14,7 @@ public class Account {
     protected String owner;				// owner
     protected BigDecimal balance;		// balance
     protected boolean isActive;			// activation status
+    protected String password;			// new add
 
     // Sets whether normal accounts are enabled to True
 	// and the account type to "N" (meaning NORMAL).
@@ -21,17 +22,26 @@ public class Account {
         isActive = true;
         category = "N";
     }
-    
-    public Account(String category) {
+
+	public Account(String category) {
         isActive = true;
         this.category = category;
     }
-    
-    public Account(String accNo, String owner, BigDecimal balance) {
+	
+	public Account(String accNo, String owner, BigDecimal balance, String password) {
         this();
         this.accNo = accNo;
         this.owner = owner;
         this.balance = balance;
+        this.password = password;
+    }
+	
+    public Account(String category, String accNo, String owner, BigDecimal balance, String password) {
+        this(category);
+        this.accNo = accNo;
+        this.owner = owner;
+        this.balance = balance;
+        this.password = password;
     }
 
     // Getter/setter for each property of the generic account class.

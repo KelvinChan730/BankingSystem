@@ -20,10 +20,9 @@ public class SavingAccount extends Account {
     }
     
 	// The category of the savings account is set to "S".
-    public SavingAccount(String accNo, String owner, BigDecimal balance, BigDecimal goalAmount) {
-        super(accNo, owner, balance);
+    public SavingAccount(String accNo, String owner, BigDecimal balance, String password, BigDecimal goalAmount) {
+        super("S", accNo, owner, balance, password);
         this.targetAmount = goalAmount;
-        this.category = "S";
     }
 
     public BigDecimal getTargetAmount() {

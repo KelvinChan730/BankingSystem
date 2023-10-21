@@ -18,7 +18,7 @@ public class SavingBank extends Bank {
             throw new WithdrawException(String.format(ErrCode.E104.getErrMsg(), df.format(goalAmount)));
         }
     }
-    @Override
+    
     public SavingAccount createAccount() throws InputMismatchException {
         try{
         	// Account number
@@ -27,8 +27,9 @@ public class SavingBank extends Bank {
             String owner = askInput("\nPlease enter the owner's name.", "");
             BigDecimal amount = askInput("\nPlease enter your initial deposit amount.", BigDecimal.ZERO);
             BigDecimal goalAmount = askInput("\nPlease enter a target amount.", BigDecimal.ZERO);
-            SavingAccount account = new SavingAccount(accNo, owner, amount, goalAmount);
-            CentralBank.getInstance().getAccountList().add(new SavingAccount(accNo, owner, amount, goalAmount));
+            String password = askInput("\nPlease enter a password.", "");
+            SavingAccount account = new SavingAccount(accNo, owner, amount, password, goalAmount);
+            CentralBank.getInstance().getAccountList().addAccount(account);
             System.out.printf("Your account has been issued for %s.", owner);
             return account;
         }catch (InputMismatchException ime){

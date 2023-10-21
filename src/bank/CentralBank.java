@@ -1,8 +1,6 @@
 package bank;
 
-import account.Account;
-
-import java.util.ArrayList;
+import account.AccountList;
 
 public class CentralBank {
 	// A central bank class that manages accounts in a banking system.
@@ -11,8 +9,8 @@ public class CentralBank {
     // BANK_NAME(Bank name)
     private static CentralBank instance = new CentralBank();
 
-    private static String BANK_NAME = "Central Bank";
-    private ArrayList<Account> accountList = new ArrayList<>();
+	private static String BANK_NAME = "Central Bank of Hong Kong";
+    private AccountList accountList = new AccountList();
 
     private CentralBank(){}
 
@@ -24,11 +22,7 @@ public class CentralBank {
     }
 
     // accountList getter/setter
-    public ArrayList<Account> getAccountList() {
+    public AccountList getAccountList() {
         return accountList;
-    }
-
-    public void setAccountList(ArrayList<Account> accountList) {
-        this.accountList = accountList;
     }
 }
