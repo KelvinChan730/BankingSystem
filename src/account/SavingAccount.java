@@ -6,13 +6,17 @@ import java.math.BigDecimal;
 
 // SavingAccount inherits from Account.
 // It is a special type of account
-public class SavingAccount extends Account{
+public class SavingAccount extends Account {
 	// The savings account class has an additional attribute called "target amount".
     private BigDecimal targetAmount = new BigDecimal(100000);
 
     public SavingAccount(){
-        super();
-        this.category = "S";
+        super("S");
+    }
+    
+    public SavingAccount(BigDecimal target){
+        this();
+        this.targetAmount = target;
     }
     
 	// The category of the savings account is set to "S".

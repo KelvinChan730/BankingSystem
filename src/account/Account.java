@@ -21,6 +21,12 @@ public class Account {
         isActive = true;
         category = "N";
     }
+    
+    public Account(String category) {
+        isActive = true;
+        this.category = category;
+    }
+    
     public Account(String accNo, String owner, BigDecimal balance) {
         this();
         this.accNo = accNo;
