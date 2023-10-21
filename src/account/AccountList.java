@@ -14,6 +14,11 @@ public class AccountList {
 		accountList.put(account.accNo, account);
 	}
 	
+	// return if account exist
+	public static boolean hasAccount(String accNo) {
+		return accountList.containsKey(accNo);
+	}
+	
 	// find account by account number
 	public static Account findAccount(String accNo) {
 		if (accountList.containsKey(accNo))
