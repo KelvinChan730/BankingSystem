@@ -7,12 +7,11 @@ public class SavingInterestCalculator implements InterestCalculator{
     public BigDecimal getInterest(BigDecimal balance) {
         BigDecimal interest;
 
-        // For a savings account, the interest rate is 50% 
-        // for balances over 1 million won and 1% otherwise.
+        // // return interest rates for saving accounts
         if(balance.compareTo(BigDecimal.valueOf(1000000)) >= 0)
-            interest = BigDecimal.valueOf(0.5);
+            interest = BigDecimal.valueOf(0.06);
         else
-            interest = BigDecimal.valueOf(0.01);
+            interest = BigDecimal.valueOf(0.055);
         return balance.multiply(interest);
     }
 }
