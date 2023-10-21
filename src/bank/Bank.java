@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Bank {
 	protected static Scanner scanner = new Scanner(System.in);
-	protected static int seq = 0;
+	protected int seq = 0;
 	public static DecimalFormat df = new DecimalFormat("#,###");
 	private HashMap<String, InterestCalculator> interestCalculators = new HashMap<>();
 
@@ -112,6 +112,15 @@ public class Bank {
 		BigDecimal parsedAmount = new BigDecimal(Double.parseDouble(amount));
 		AccountList.addAccount(new Account(accNo, name, parsedAmount, password));
 		return true;
+	}
+	
+	// delete bank account
+	public boolean deleteAccount(String accNo, String password) {
+		if(!login(accNo, password)) {
+			return false;
+		}
+		AccountList.deleteAccount(accNo, password);
+		return !AccountList.hasAccount(accNo);
 	}
 	
 	// transfer amount of account currency to target account
