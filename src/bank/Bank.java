@@ -123,8 +123,10 @@ public class Bank {
 		BigDecimal reducedBalance = transferAccBalance.subtract(amount);
 
 		// check if saving account eligible for transfer
-		if (transferAcc.getCategory() == "S" && ((SavingAccount)transferAcc).getTargetAmount().compareTo(reducedBalance) > 0) {
-			return false;
+		if (transferAcc.getCategory() == "S" && transferAcc instanceof SavingAccount) {
+			if (((SavingAccount)transferAcc).getTargetAmount().compareTo(reducedBalance) > 0) {
+				return false;
+			}
 		}
 		
 		transferAcc.setBalance(transferAccBalance.subtract(amount));
