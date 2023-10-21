@@ -3,42 +3,19 @@ package account;
 import java.math.BigDecimal;
 
 import bank.Bank;
-import constant.ForeignCurrency;
+import constant.Currency;
 
 public class ForeignCurrencyAccount extends Account {
-	private final ForeignCurrency currencyType;
+	private final Currency currencyType;
 	
-	public ForeignCurrencyAccount(ForeignCurrency currency) {
+	public ForeignCurrencyAccount(Currency currency) {
         super("F");
         this.currencyType = currency;
     }
 	
-	public ForeignCurrency getCurrencyType() {
+	public Currency getCurrencyType() {
         return currencyType;
     }
-	
-	public boolean transfer(ForeignCurrencyAccount targetAccount, BigDecimal amount) {
-		if (balance.compareTo(amount) < 0 || amount.compareTo(new BigDecimal(0)) <= 0)
-			return false;
-		
-		balance.subtract(amount);
-		BigDecimal amountHKD = amount.multiply(currencyType.getExchangeRate());
-		BigDecimal amountTargetCurrency = amountHKD.divide(targetAccount.getCurrencyType().getExchangeRate());
-		BigDecimal targetBalance = targetAccount.getBalance().add(amountTargetCurrency);
-		targetAccount.setBalance(targetBalance);
-		return true;
-	}
-	
-	public boolean transfer(Account targetAccount, BigDecimal amount) {
-		if (balance.compareTo(amount) < 0 || amount.compareTo(new BigDecimal(0)) <= 0)
-			return false;
-		
-		balance.subtract(amount);
-		BigDecimal amountHKD = amount.multiply(currencyType.getExchangeRate());
-		BigDecimal newTargetBalance = targetAccount.getBalance().add(amountHKD);
-		targetAccount.setBalance(newTargetBalance);
-		return true;
-	}
 	
 	// Print the basic information of the foreign currency account.
     @Override

@@ -2,6 +2,7 @@ package bank;
 
 import account.Account;
 import account.AccountList;
+import account.ForeignCurrencyAccount;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -64,6 +65,20 @@ public class Bank {
 		
 		BigDecimal parsedAmount = new BigDecimal(Double.parseDouble(amount));
 		AccountList.addAccount(new Account(accNo, name, parsedAmount, password));
+		return true;
+	}
+	
+	// transfer amount of account currency to target account
+	public boolean transfer(Account transferAcc, Account targetAcc, BigDecimal amount) {
+		BigDecimal transferAccBalance = transferAcc.getBalance();
+		if (transferAccBalance.compareTo(amount) < 0 || amount.compareTo(BigDecimal.ZERO) <= 0)
+			return false;
+		
+		transferAcc.setBalance(transferAccBalance.subtract(amount));
+		BigDecimal amountHKD = amount.multiply(transferAcc.getCurrencyType().getExchangeRate());
+		BigDecimal amountTargetCurrency = amountHKD.divide(targetAcc.getCurrencyType().getExchangeRate());
+		BigDecimal targetBalance = targetAcc.getBalance().add(amountTargetCurrency);
+		targetAcc.setBalance(targetBalance);
 		return true;
 	}
 }
