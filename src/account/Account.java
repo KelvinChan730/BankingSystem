@@ -1,6 +1,7 @@
 package account;
 
 import bank.Bank;
+import constant.Currency;
 
 import java.math.BigDecimal;
 
@@ -76,6 +77,10 @@ public class Account {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+    
+    public Currency getCurrencyType() {
+        return Currency.HKD;
     }
 
 	// Print the basic information of the account.

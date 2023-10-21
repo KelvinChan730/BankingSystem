@@ -3,7 +3,8 @@ package constant;
 import java.math.BigDecimal;
 
 // Foreign currencies and exchange rates with real life data
-public enum ForeignCurrency {
+public enum Currency {
+	HKD("HKD", new BigDecimal(1.0000)),
 	YMB("YMB", new BigDecimal(1.0823)),
 	USD("USD", new BigDecimal(7.8770)),
 	AUD("AUD", new BigDecimal(5.0250)),
@@ -16,7 +17,7 @@ public enum ForeignCurrency {
 	public final String name;
     public final BigDecimal exchangeRate; // value of foreign currency in HKD
     
-    ForeignCurrency(String name, BigDecimal rate) {
+    Currency(String name, BigDecimal rate) {
 		this.name = name;
 		this.exchangeRate = rate;
 	}
