@@ -49,6 +49,51 @@ public class Bank {
 		return input.matches(pattern);
 	}
 
+	public static boolean containsOnlyDigits(String str) {
+	    return str.matches("\\d+");
+	}
+
+	public boolean login(String accNo, String password) {
+		//check the accNo format
+		if(!containsOnlyDigits(accNo)) {
+			return false;
+		}
+		//check do the account exist 
+		if(!AccountList.hasAccount(accNo)) {
+			return false;
+		}
+		// check the password format
+		if(!validateStringPassword(password)) {
+			return false;
+		}
+		// check do the password equal
+		Account existAccount = AccountList.findAccount(accNo);
+		if(!password.equals(existAccount.getAccountPassword())) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean withdraw(String accNo, String password, String money) {
+		// check do user login successfully
+		if(!login(accNo, password)) {
+			return false;
+		}
+		//check the money format
+		if(!containsOnlyDigits(money)) {
+			return false;
+		}
+		//check do balance >= money
+		int compare = new BigDecimal(money).compareTo(AccountList.findAccount(accNo).getBalance());
+		if(compare > 0) {
+			return false;
+		}
+		BigDecimal afterWithdraw = AccountList.findAccount(accNo).getBalance().subtract(new BigDecimal(money));
+		Account currentAccount = AccountList.findAccount(accNo);
+		currentAccount.setBalance(afterWithdraw);
+		return true;
+	}
+
 	public boolean addAccount(String name, String amount, String password) {
 		String accNo = String.format(new DecimalFormat("0000").format(++seq));
 

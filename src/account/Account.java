@@ -88,6 +88,10 @@ public class Account {
         System.out.printf("Account type: %s | Account number: %s | Account holder: %s | Balance: %s원\n",
                 category, accNo, owner, Bank.df.format(balance));
     }
+    
+    public String getAccountPassword() {
+    	return password;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -121,4 +125,5 @@ public class Account {
         result = prime * result + ((owner == null) ? 0 : owner.hashCode());
         return result;
     }
+    
 }
