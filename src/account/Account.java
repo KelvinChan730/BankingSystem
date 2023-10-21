@@ -21,7 +21,7 @@ public class Account {
         category = "N";
     }
 
-	public Account(String category) {
+	protected Account(String category) {
         isActive = true;
         this.category = category;
     }
@@ -34,7 +34,8 @@ public class Account {
         this.password = password;
     }
 	
-    public Account(String category, String accNo, String owner, BigDecimal balance, String password) {
+	
+    protected Account(String category, String accNo, String owner, BigDecimal balance, String password) {
         this(category);
         this.accNo = accNo;
         this.owner = owner;
@@ -91,30 +92,6 @@ public class Account {
     
     public String getAccountPassword() {
     	return password;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Account other = (Account) obj;
-        if (accNo == null) {
-            if (other.accNo != null)
-                return false;
-        } else if (!accNo.equals(other.accNo)) {
-            return false;
-        }
-        if (owner == null) {
-            if (other.owner != null)
-                return false;
-        } else if (!owner.equals(other.owner)) {
-            return false;
-        }
-        return true;
     }
 
     @Override
