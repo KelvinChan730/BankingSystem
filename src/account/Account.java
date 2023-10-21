@@ -1,9 +1,6 @@
 package account;
 
 import bank.Bank;
-import exceptions.funcException.DepositException;
-import exceptions.funcException.TransferException;
-import exceptions.funcException.WithdrawException;
 
 import java.math.BigDecimal;
 
@@ -85,27 +82,6 @@ public class Account {
     public void getAccountInfo(){
         System.out.printf("Account type: %s | Account number: %s | Account holder: %s | Balance: %s원\n",
                 category, accNo, owner, Bank.df.format(balance));
-    }
-    
-
-	// Withdraw an amount of money
-    public BigDecimal withdraw(BigDecimal amount) throws WithdrawException {
-        if(this.balance.compareTo(amount) < 0){
-            throw new WithdrawException("잔액이 모자랍니다.");
-        }else{
-            this.balance = this.balance.subtract(amount);
-        }
-        return amount;
-    }
-
-	// Deposit an amount of money
-    public BigDecimal deposit(BigDecimal amount) throws DepositException {
-        try {
-            this.balance = this.balance.add(amount);
-        }catch (Exception e){
-            throw new DepositException(e.getMessage());
-        }
-            return amount;
     }
 
     @Override
