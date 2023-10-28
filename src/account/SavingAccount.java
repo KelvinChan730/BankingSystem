@@ -29,10 +29,10 @@ public class SavingAccount extends Account {
         return targetAmount;
     }
 
-	// Print the basic information of the saving account.
+	// basic information of the saving account.
     @Override
-    public void getAccountInfo() {
-        System.out.printf("Account type: %s | Account number: %s | Account holder: %s | Balance: %s | Target Amount: %s\n",
+    public String toString(){
+        return String.format("Account type: %s | Account number: %s | Account holder: %s | Balance: %s | Target Amount: %s\n",
                 category, accNo, owner, Bank.df.format(balance), Bank.df.format(targetAmount));
     }
 }

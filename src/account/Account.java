@@ -85,12 +85,6 @@ public class Account {
     public Currency getCurrencyType() {
         return Currency.HKD;
     }
-
-	// Print the basic information of the account.
-    public void getAccountInfo(){
-        System.out.printf("Account type: %s | Account number: %s | Account holder: %s | Balance: %s원\n",
-                category, accNo, owner, Bank.df.format(balance));
-    }
     
     public String getAccountPassword() {
     	return password;
@@ -102,6 +96,13 @@ public class Account {
     
     public ArrayList<String> getLoanRecordId(){
     	return loanRecordId;
+    }
+
+	// basic information of the account.
+    @Override
+    public String toString(){
+        return String.format("Account type: %s | Account number: %s | Account holder: %s | Balance: %s",
+                category, accNo, owner, Bank.df.format(balance));
     }
 
     @Override

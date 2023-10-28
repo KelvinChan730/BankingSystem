@@ -15,10 +15,10 @@ public class ForeignCurrencyAccount extends Account {
         return currencyType;
     }
 	
-	// Print the basic information of the foreign currency account.
+	// basic information of the foreign currency account.
     @Override
-    public void getAccountInfo() {
-        System.out.printf("Account type: %s | Account number: %s | Account holder: %s | Balance: %s | Currency Type: %s\n",
+    public String toString(){
+        return String.format("Account type: %s | Account number: %s | Account holder: %s | Balance: %s | Currency Type: %s\n",
                 category, accNo, owner, Bank.df.format(balance), currencyType.getName());
     }
 }
