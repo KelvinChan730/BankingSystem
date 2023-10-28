@@ -1,17 +1,9 @@
 package test;
 
-import account.Account;
-import account.AccountList;
-import account.ForeignCurrencyAccount;
-import account.SavingAccount;
 import bank.Bank;
 
-import static org.junit.Assert.assertEquals;
-
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Scanner;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
@@ -21,7 +13,7 @@ public class TestAccountDeletion {
 		Bank bank = new Bank();
 		bank.addAccount("Jacky", "10000", "123456");
 		boolean result = bank.deleteAccount("0001", "123456");
-		assertEquals(true, result);
+		assertTrue(result);
 	}
 
 	@Test
@@ -29,7 +21,7 @@ public class TestAccountDeletion {
 		Bank bank = new Bank();
 		bank.addAccount("Jacky", "10000", "123456");
 		boolean result = bank.deleteAccount("0002", "123456");
-		assertEquals(false, result);
+		assertFalse(result);
 	}
 
 	@Test
@@ -37,7 +29,7 @@ public class TestAccountDeletion {
 		Bank bank = new Bank();
 		bank.addAccount("Jacky", "10000", "123456");
 		boolean result = bank.deleteAccount("0001", "1234567");
-		assertEquals(false, result);
+		assertFalse(result);
 	}
 	
 	@Test
@@ -45,7 +37,7 @@ public class TestAccountDeletion {
 		Bank bank = new Bank();
 		bank.addAccount("Jacky", "10000", "123456");
 		boolean result = bank.deleteAccount("++0001", "1234567");
-		assertEquals(false, result);
+		assertFalse(result);
 	}
 	
 	@Test
@@ -53,6 +45,6 @@ public class TestAccountDeletion {
 		Bank bank = new Bank();
 		bank.addAccount("Jacky", "10000", "123456");
 		boolean result = bank.deleteAccount("0001", "+++++1234567");
-		assertEquals(false, result);
+		assertFalse(result);
 	}
 }
