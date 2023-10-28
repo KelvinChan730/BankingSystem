@@ -158,7 +158,7 @@ public class Bank {
 			return false;
 		}
 		// if user expect loan equal to 0, return false
-		if(new BigDecimal(userExpectLoan).compareTo(BigDecimal.ZERO) == 0) {
+		if (new BigDecimal(userExpectLoan).compareTo(BigDecimal.ZERO) == 0) {
 			return false;
 		}
 		// get the user account
@@ -191,5 +191,53 @@ public class Bank {
 			UserLoanList.addLoanRecord(new Loan(accNo, new BigDecimal(userExpectLoan)));
 		}
 		return result;
+	}
+
+	public boolean payBack(String accNo, String password, String loanId) {
+		// check do user login successfully
+		if (!login(accNo, password)) {
+			return false;
+		}
+		// check the LoanId format
+		if (!containsOnlyDigits(loanId)) {
+			return false;
+		}
+		// get the user account
+		Account userAccount = AccountList.findAccount(accNo);
+		// get the user balance
+		BigDecimal userBalance = userAccount.getBalance();
+		Loan record = UserLoanList.findLoadRecord(loanId);
+		if (record == null) {
+			return false;
+		}
+		BigDecimal payBackAmount = record.getLoanAmount();
+		// interest for the loan
+		BigDecimal interest;
+		int compareMillion = payBackAmount.compareTo(new BigDecimal("1000000"));
+		int compare500Thousand = payBackAmount.compareTo(new BigDecimal("500000"));
+		if (compareMillion >= 0) {
+			interest = payBackAmount.multiply(new BigDecimal("0.1"));
+		} else if (compare500Thousand >= 0) {
+			interest = payBackAmount.multiply(new BigDecimal("0.2"));
+		} else {
+			interest = payBackAmount.multiply(new BigDecimal("0.3"));
+		}
+		payBackAmount = payBackAmount.add(interest);
+
+		//check do user has enough balance
+		int enoughBalance = userBalance.compareTo(payBackAmount);
+		
+		//check is payback is successful
+		boolean result;
+		if (enoughBalance>=0) {
+			BigDecimal currentBalance = userBalance.subtract(payBackAmount);
+			userAccount.setBalance(currentBalance);
+			record.payBackSuccessful();
+			result = true;
+			
+		}else {
+			result = false;
+		}
+			return result;
 	}
 }

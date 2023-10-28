@@ -10,6 +10,11 @@ public class Loan {
 	public Loan(String accountId, BigDecimal loanAmount) {
 		this.accountId = accountId;
 		this.loanAmount = loanAmount;
+		payBack = false;
+	}
+	
+	public void payBackSuccessful() {
+		payBack = true;
 	}
 	
 	public String getAccountId(){
