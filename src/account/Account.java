@@ -4,6 +4,7 @@ import bank.Bank;
 import constant.Currency;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class Account {
     // The general account class has five attributes:
@@ -13,6 +14,7 @@ public class Account {
     protected BigDecimal balance;		// balance
     protected boolean isActive;			// activation status
     protected String password;			// new add
+    protected ArrayList<String> loanRecordId = new ArrayList<String>();
 
     // Sets whether normal accounts are enabled to True
 	// and the account type to "N" (meaning NORMAL).
@@ -92,6 +94,14 @@ public class Account {
     
     public String getAccountPassword() {
     	return password;
+    }
+    
+    public void addLoanRecord(String loanId) {
+    	loanRecordId.add(loanId);
+    }
+    
+    public ArrayList<String> getLoanRecordId(){
+    	return loanRecordId;
     }
 
     @Override
