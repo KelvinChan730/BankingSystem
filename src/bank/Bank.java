@@ -39,6 +39,7 @@ public class Bank {
 		account.setBalance(afterDeposit);
 		return true;
 	}
+	
 
 	public boolean addAccount(String name, String amount, String password) {
 		String accNo = String.format(new DecimalFormat("0000").format(++seq));
