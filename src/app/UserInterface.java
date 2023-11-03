@@ -117,12 +117,11 @@ public class UserInterface {
 		
 		try {
 			// prompt user and get input with verified format
-			AccountPara para = new AccountPara();
-			para.owner = inputHandler.promptName();
-			para.password = inputHandler.promptPassword();
-			para.phoneNo = inputHandler.promptPhoneNo();
+			owner = inputHandler.promptName();
+			password = inputHandler.promptPassword();
+			phoneNo = inputHandler.promptPhoneNo();
 			
-			return bank.addAccount(para);
+			return bank.addAccount(new AccountPara(owner, password, phoneNo));
 		} catch (IOFunctionException ioex) {
 			System.out.println("IOFunctionException thrown  :" + ioex.getMessage());
 		}

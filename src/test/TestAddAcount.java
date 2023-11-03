@@ -7,31 +7,14 @@ import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
+import account.factory.AccountPara;
+
 public class TestAddAcount {
 	@Test
-	public void testAddAccount_1() {
-//		Bank bank = new Bank();
-//		boolean result = bank.addAccount("Jacky", "10000", "123456");
-//		assertTrue(result);
-	}
-	@Test
-	public void testAddAccount_2() {
-//		Bank bank = new Bank();
-//		boolean result = bank.addAccount("Jacky+", "10000", "123456");
-//		assertFalse(result);
-	}
-	
-	@Test
-	public void testAddAccount_3() {
-//		Bank bank = new Bank();
-//		boolean result = bank.addAccount("Jacky", "string", "123456");
-//		assertFalse(result);
-	}
-	
-	@Test
-	public void testAddAccount_4() {
-//		Bank bank = new Bank();
-//		boolean result = bank.addAccount("Jacky", "10000", "123456|||");
-//		assertFalse(result);
+	public void testAddAccount_NormalCase() {
+		Bank bank = new Bank();
+		AccountPara para = new AccountPara("Jacky", "123456", "12345678");
+		boolean result = bank.addAccount(para);
+		assertTrue(result);
 	}
 }

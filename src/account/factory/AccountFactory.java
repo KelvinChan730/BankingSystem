@@ -6,7 +6,7 @@ import account.Account;
 import account.ForeignCurrencyAccount;
 import account.SavingAccount;
 
-public abstract class AccountAbstractFactory {
+public abstract class AccountFactory {
 	private static int sequence = 1;
 	
 	private static String getSequence() {

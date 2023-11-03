@@ -5,7 +5,7 @@ import account.AccountList;
 import account.Loan;
 import account.SavingAccount;
 import account.UserLoanList;
-import account.factory.AccountAbstractFactory;
+import account.factory.AccountFactory;
 import account.factory.AccountPara;
 import constant.AccountType;
 
@@ -36,7 +36,7 @@ public class Bank {
 	
 
 	public boolean addAccount(AccountPara para) {
-		AccountList.addAccount(AccountAbstractFactory.createAccount(para));
+		AccountList.addAccount(AccountFactory.createAccount(para));
 		return true;
 	}
 

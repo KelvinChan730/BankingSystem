@@ -16,15 +16,9 @@ public class Application {
 	
 	// function to simulate loading existing records
 	public static void loadRecords() {
-		AccountPara para1 = new AccountPara();
-		para1.owner = "John";
-		para1.password = "135791";
-		para1.phoneNo = "12345678";
+		AccountPara para1 = new AccountPara("John", "135791", "12345678");
 		bank.addAccount(para1);
-		AccountPara para2 = new AccountPara();
-		para2.owner = "Jane";
-		para2.password = "123456";
-		para2.phoneNo = "98765432";
+		AccountPara para2 = new AccountPara("Jane", "123456", "98765432");
 		bank.addAccount(para2);
 	}
 	
