@@ -7,8 +7,8 @@ import java.math.BigDecimal;
 
 import org.junit.Test;
 
-import main.account.AccountList;
 import main.bank.Bank;
+import main.db.AccountList;
 
 public class TestPayback {
 //	@Test

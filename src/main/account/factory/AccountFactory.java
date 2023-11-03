@@ -3,30 +3,30 @@ package main.account.factory;
 import main.account.Account;
 import main.account.ForeignCurrencyAccount;
 import main.account.SavingAccount;
-import main.utility.Formatter;
+import main.db.Sequenced;
 
-public abstract class AccountFactory {
-	private static int sequence = 1;
+public class AccountFactory extends Sequenced {
+	private static AccountFactory instance = null;
 	
-	private static String getSequence() {
-		return Formatter.formatSequence(sequence++);
+	private AccountFactory() {}
+	
+	public static AccountFactory getInstance() {
+		if (instance == null)
+			instance = new AccountFactory();
+		return instance;
 	}
 	
-	public static int getIntSequence() {
-		return sequence;
-	}
-	
-	public static Account createAccount(AccountPara para) {
+	public Account createAccount(AccountPara para) {
 		String accNo = getSequence();
 		return new Account(accNo, para);
 	}
 	
-	public static SavingAccount createSavingAccount(SavingAccountPara para) {
+	public SavingAccount createSavingAccount(SavingAccountPara para) {
 		String accNo = getSequence();
 		return new SavingAccount(accNo, para);
 	}
 	
-	public static ForeignCurrencyAccount createForeignCurrencyAccount(ForeignCurrencyAccountPara para) {
+	public ForeignCurrencyAccount createForeignCurrencyAccount(ForeignCurrencyAccountPara para) {
 		String accNo = getSequence();
 		return new ForeignCurrencyAccount(accNo, para);
 	}

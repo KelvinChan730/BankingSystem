@@ -1,6 +1,8 @@
-package main.account;
+package main.db;
 
 import java.util.HashMap;
+
+import main.account.Account;
 
 public class AccountList {
 	private static HashMap<String, Account> accountList = new HashMap<>();
@@ -11,7 +13,7 @@ public class AccountList {
 	
 	// add account
 	public static void addAccount(Account account) {
-		accountList.put(account.accNo, account);
+		accountList.put(account.getAccNo(), account);
 	}
 	
 	// return if account exist

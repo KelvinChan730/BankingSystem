@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import main.account.AccountList;
 import main.account.Loan;
-import main.account.UserLoanList;
 import main.bank.Bank;
+import main.db.AccountList;
+import main.db.LoanList;
 
 public class TestLoan {
 //	@Test

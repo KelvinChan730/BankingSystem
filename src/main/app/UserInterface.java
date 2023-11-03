@@ -3,9 +3,9 @@ package main.app;
 import java.math.BigDecimal;
 
 import main.account.Account;
-import main.account.AccountList;
 import main.account.factory.AccountPara;
 import main.bank.Bank;
+import main.db.AccountList;
 import main.exception.IOFunctionException;
 import main.utility.Authentication;
 import main.utility.InputHandler;

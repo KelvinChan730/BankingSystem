@@ -1,17 +1,19 @@
 package main.bank;
 
 import main.account.Account;
-import main.account.AccountList;
 import main.account.Loan;
 import main.account.SavingAccount;
-import main.account.UserLoanList;
 import main.account.factory.AccountFactory;
 import main.account.factory.AccountPara;
 import main.constant.AccountType;
+import main.db.AccountList;
+import main.db.LoanList;
 
 import java.math.BigDecimal;
 
 public class Bank {
+	private AccountFactory accFactory = AccountFactory.getInstance();
+	private LoanList loadList = LoanList.getInstance();
 	
 	public boolean withdraw(Account account, BigDecimal amount) {
 		// check if account has enough balance
@@ -34,7 +36,7 @@ public class Bank {
 	
 
 	public boolean addAccount(AccountPara para) {
-		AccountList.addAccount(AccountFactory.createAccount(para));
+		AccountList.addAccount(accFactory.createAccount(para));
 		return true;
 	}
 
@@ -113,7 +115,7 @@ public class Bank {
 			result = false;
 		} else {
 			result = true;
-			UserLoanList.addLoanRecord(new Loan(accNo, new BigDecimal(userExpectLoan)));
+			loadList.addLoanRecord(new Loan(accNo, new BigDecimal(userExpectLoan)));
 		}
 		return result;
 	}
@@ -131,7 +133,7 @@ public class Bank {
 		Account userAccount = AccountList.findAccount(accNo);
 		// get the user balance
 		BigDecimal userBalance = userAccount.getBalance();
-		Loan record = UserLoanList.findLoadRecord(loanId);
+		Loan record = loadList.findLoadRecord(loanId);
 		if (record == null) {
 			return false;
 		}
