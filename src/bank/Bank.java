@@ -33,6 +33,7 @@ public class Bank {
 		account.setBalance(afterDeposit);
 		return true;
 	}
+	
 
 	public boolean addAccount(AccountPara para) {
 		AccountList.addAccount(AccountAbstractFactory.createAccount(para));
