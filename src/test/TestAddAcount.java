@@ -1,13 +1,12 @@
 package test;
 
-import bank.Bank;
+import main.account.factory.AccountPara;
+import main.bank.Bank;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
-
-import account.factory.AccountPara;
 
 public class TestAddAcount {
 	@Test

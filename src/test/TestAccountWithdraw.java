@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import bank.Bank;
+import main.bank.Bank;
 
 class TestAccountWithdraw {
 //	@Test
