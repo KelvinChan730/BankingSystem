@@ -1,16 +1,15 @@
 package main.account.factory;
 
-import java.text.DecimalFormat;
-
 import main.account.Account;
 import main.account.ForeignCurrencyAccount;
 import main.account.SavingAccount;
+import main.utility.Formatter;
 
 public abstract class AccountFactory {
 	private static int sequence = 1;
 	
 	private static String getSequence() {
-		return String.format(new DecimalFormat("0000").format(sequence++));
+		return Formatter.formatSequence(sequence++);
 	}
 	
 	public static int getIntSequence() {

@@ -1,9 +1,9 @@
 package main.account;
 
 import main.account.factory.AbstractAccountPara;
-import main.bank.Bank;
 import main.constant.AccountType;
 import main.constant.Currency;
+import main.utility.Formatter;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -54,11 +54,11 @@ public class Account implements IAccount{
         return Currency.HKD;
     }
     
-    public String getAccountPassword() {
+    public String getPassword() {
     	return password;
     }
     
-    public void setAccountPassword(String password) {
+    public void setPassword(String password) {
     	this.password = password;
     }
     
@@ -74,7 +74,7 @@ public class Account implements IAccount{
     @Override
     public String toString(){
         return String.format("Account type: %s | Account number: %s | Account holder: %s | Balance: %s",
-                type.name(), accNo, owner, Bank.df.format(balance));
+                type.name(), accNo, owner, Formatter.formatBalance(balance));
     }
 
     @Override

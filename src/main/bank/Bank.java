@@ -10,10 +10,8 @@ import main.account.factory.AccountPara;
 import main.constant.AccountType;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 public class Bank {
-	public static DecimalFormat df = new DecimalFormat("#,###");
 	
 	public boolean withdraw(Account account, BigDecimal amount) {
 		// check if account has enough balance

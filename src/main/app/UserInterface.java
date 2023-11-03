@@ -44,7 +44,7 @@ public class UserInterface {
 
 		// check do the password equal
 		Account existAccount = AccountList.findAccount(accNo);
-		if(!password.equals(existAccount.getAccountPassword())) {
+		if(!password.equals(existAccount.getPassword())) {
 			return null;
 		}
 		

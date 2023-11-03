@@ -1,12 +1,13 @@
 package main.account;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import main.utility.Formatter;
+
 public class UserLoanList {
 	private static HashMap<String, Loan> loadRecordList = new HashMap<>();
-	protected static int seq = 0;
+	protected static int sequence = 1;
 
 	public static HashMap<String, Loan> getList() {
 		return loadRecordList;
@@ -14,7 +15,7 @@ public class UserLoanList {
 
 	// add loan record
 	public static void addLoanRecord(Loan loan) {
-		String loanId = String.format(new DecimalFormat("0000").format(++seq));
+		String loanId = Formatter.formatSequence(sequence++);
 		loadRecordList.put(loanId, loan);
 		Account user = AccountList.findAccount(loan.getAccountId());
 		user.addLoanRecord(loanId);

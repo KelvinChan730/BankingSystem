@@ -1,9 +1,6 @@
 package main.account;
 
-import java.math.BigDecimal;
-
 import main.account.factory.ForeignCurrencyAccountPara;
-import main.bank.Bank;
 import main.constant.AccountType;
 import main.constant.Currency;
 
@@ -15,7 +12,8 @@ public class ForeignCurrencyAccount extends Account {
         super(accNo, para);
         this.currencyType = para.currencyType;
     }
-	
+
+    @Override
 	public Currency getCurrencyType() {
         return currencyType;
     }

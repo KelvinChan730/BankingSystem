@@ -1,7 +1,5 @@
 package main.account.factory;
 
-import java.math.BigDecimal;
-
 import main.account.ForeignCurrencyAccount;
 import main.constant.Currency;
 

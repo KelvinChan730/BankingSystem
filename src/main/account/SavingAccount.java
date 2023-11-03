@@ -1,8 +1,8 @@
 package main.account;
 
 import main.account.factory.SavingAccountPara;
-import main.bank.Bank;
 import main.constant.AccountType;
+import main.utility.Formatter;
 
 import java.math.BigDecimal;
 
@@ -11,9 +11,6 @@ import java.math.BigDecimal;
 public class SavingAccount extends Account {
 	protected final AccountType type = AccountType.SAVING;		// account type = saving
     private BigDecimal targetAmount = new BigDecimal(100000);	// target amount
-    
-    
-
     
     public SavingAccount(String accNo, SavingAccountPara para) {
     	super(accNo, para);
@@ -27,6 +24,6 @@ public class SavingAccount extends Account {
 	// basic information of the saving account.
     @Override
     public String toString(){
-        return super.toString() + String.format(" | Target Amount: %s\n", Bank.df.format(targetAmount));
+        return super.toString() + String.format(" | Target Amount: %s\n", Formatter.formatBalance(targetAmount));
     }
 }
