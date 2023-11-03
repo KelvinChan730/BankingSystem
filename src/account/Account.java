@@ -1,57 +1,34 @@
 package account;
 
 import bank.Bank;
+import constant.AccountType;
 import constant.Currency;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class Account {
-    // The general account class has five attributes:
-    protected String category;			// account type (N: deposit account, S: savings account)
-    protected String accNo;				// account number
-    protected String owner;				// owner
-    protected BigDecimal balance;		// balance
-    protected boolean isActive;			// activation status
-    protected String password;			// new add
+import account.factory.AbstractAccountPara;
+
+public class Account implements IAccount{
+	protected final AccountType type = AccountType.NORMAL;
+    protected String accNo;							// account number
+    protected String owner;							// owner
+    protected BigDecimal balance;					// balance
+    protected String password;						// password
+    protected String phoneNo;						// phone number
     protected ArrayList<String> loanRecordId = new ArrayList<String>();
-
-    // Sets whether normal accounts are enabled to True
-	// and the account type to "N" (meaning NORMAL).
-    public Account() {
-        isActive = true;
-        category = "N";
-    }
-
-	protected Account(String category) {
-        isActive = true;
-        this.category = category;
-    }
-	
-	public Account(String accNo, String owner, BigDecimal balance, String password) {
-        this();
-        this.accNo = accNo;
-        this.owner = owner;
-        this.balance = balance;
-        this.password = password;
-    }
-	
-	
-    protected Account(String category, String accNo, String owner, BigDecimal balance, String password) {
-        this(category);
-        this.accNo = accNo;
-        this.owner = owner;
-        this.balance = balance;
-        this.password = password;
+    
+    public Account(String accNo, AbstractAccountPara para) {
+    	this.accNo = accNo;
+        this.owner = para.owner;
+        this.balance = BigDecimal.ZERO;
+        this.password = para.password;
+        this.phoneNo = para.phoneNo;
     }
 
     // Getter/setter for each property of the generic account class.
     public String getAccNo() {
         return accNo;
-    }
-
-    public void setAccNo(String accNo) {
-        this.accNo = accNo;
     }
 
     public String getOwner() {
@@ -70,16 +47,8 @@ public class Account {
         this.balance = balance;
     }
 
-    public boolean isActive(){
-        return isActive;
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
+    public AccountType getType() {
+        return type;
     }
     
     public Currency getCurrencyType() {
@@ -88,6 +57,10 @@ public class Account {
     
     public String getAccountPassword() {
     	return password;
+    }
+    
+    public void setAccountPassword(String password) {
+    	this.password = password;
     }
     
     public void addLoanRecord(String loanId) {
@@ -102,7 +75,7 @@ public class Account {
     @Override
     public String toString(){
         return String.format("Account type: %s | Account number: %s | Account holder: %s | Balance: %s",
-                category, accNo, owner, Bank.df.format(balance));
+                type.name(), accNo, owner, Bank.df.format(balance));
     }
 
     @Override

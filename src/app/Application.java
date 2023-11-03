@@ -2,6 +2,7 @@ package app;
 
 import account.Account;
 import account.AccountList;
+import account.factory.AccountPara;
 import bank.Bank;
 import exception.IOFunctionException;
 import utility.Authentication;
@@ -15,8 +16,16 @@ public class Application {
 	
 	// function to simulate loading existing records
 	public static void loadRecords() {
-		bank.addAccount("John",  "10000", "135791");
-		bank.addAccount("Jane", "100000", "123456");
+		AccountPara para1 = new AccountPara();
+		para1.owner = "John";
+		para1.password = "135791";
+		para1.phoneNo = "12345678";
+		bank.addAccount(para1);
+		AccountPara para2 = new AccountPara();
+		para2.owner = "Jane";
+		para2.password = "123456";
+		para2.phoneNo = "98765432";
+		bank.addAccount(para2);
 	}
 	
 	// setup application

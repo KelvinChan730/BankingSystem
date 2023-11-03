@@ -1,28 +1,24 @@
 package account;
 
 import bank.Bank;
+import constant.AccountType;
 
 import java.math.BigDecimal;
+
+import account.factory.SavingAccountPara;
 
 // SavingAccount inherits from Account.
 // It is a special type of account
 public class SavingAccount extends Account {
-	// The savings account class has an additional attribute called "target amount".
-    private BigDecimal targetAmount = new BigDecimal(100000);
+	protected final AccountType type = AccountType.SAVING;		// account type = saving
+    private BigDecimal targetAmount = new BigDecimal(100000);	// target amount
+    
+    
 
-    public SavingAccount(){
-        super("S");
-    }
     
-    public SavingAccount(BigDecimal target){
-        this();
-        this.targetAmount = target;
-    }
-    
-	// The category of the savings account is set to "S".
-    public SavingAccount(String accNo, String owner, BigDecimal balance, String password, BigDecimal goalAmount) {
-        super("S", accNo, owner, balance, password);
-        this.targetAmount = goalAmount;
+    public SavingAccount(String accNo, SavingAccountPara para) {
+    	super(accNo, para);
+        this.targetAmount = para.targetAmount;
     }
 
     public BigDecimal getTargetAmount() {
@@ -32,7 +28,6 @@ public class SavingAccount extends Account {
 	// basic information of the saving account.
     @Override
     public String toString(){
-        return String.format("Account type: %s | Account number: %s | Account holder: %s | Balance: %s | Target Amount: %s\n",
-                category, accNo, owner, Bank.df.format(balance), Bank.df.format(targetAmount));
+        return super.toString() + String.format(" | Target Amount: %s\n", Bank.df.format(targetAmount));
     }
 }

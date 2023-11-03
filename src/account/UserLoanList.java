@@ -43,10 +43,4 @@ public class UserLoanList {
 		}
 		return null;
 	}
-
-//	public static void deleteAccount(String accNo, String password) {
-//		// System.out.println(accountList.size());
-//		String key = accNo;
-//		accountList.remove(key);
-//	}
 }

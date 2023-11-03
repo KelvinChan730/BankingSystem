@@ -1,14 +1,19 @@
 package account;
 
+import java.math.BigDecimal;
+
+import account.factory.ForeignCurrencyAccountPara;
 import bank.Bank;
+import constant.AccountType;
 import constant.Currency;
 
 public class ForeignCurrencyAccount extends Account {
-	private final Currency currencyType;
+	protected final AccountType type = AccountType.FOREIGN_CURRENCY;		// account type = foreign currency
+	private final Currency currencyType;									// currency type
 	
-	public ForeignCurrencyAccount(Currency currency) {
-        super("F");
-        this.currencyType = currency;
+	public ForeignCurrencyAccount(String accNo, ForeignCurrencyAccountPara para) {
+        super(accNo, para);
+        this.currencyType = para.currencyType;
     }
 	
 	public Currency getCurrencyType() {
@@ -18,7 +23,6 @@ public class ForeignCurrencyAccount extends Account {
 	// basic information of the foreign currency account.
     @Override
     public String toString(){
-        return String.format("Account type: %s | Account number: %s | Account holder: %s | Balance: %s | Currency Type: %s\n",
-                category, accNo, owner, Bank.df.format(balance), currencyType.getName());
+        return super.toString() + String.format(" | Currency Type: %s\n", currencyType.getName());
     }
 }

@@ -5,21 +5,15 @@ import account.AccountList;
 import account.Loan;
 import account.SavingAccount;
 import account.UserLoanList;
+import account.factory.AccountAbstractFactory;
+import account.factory.AccountPara;
+import constant.AccountType;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
-//import java.util.HashMap;
-//import java.util.Scanner;
 
 public class Bank {
-	protected int seq = 0;
 	public static DecimalFormat df = new DecimalFormat("#,###");
-//	private HashMap<String, InterestCalculator> interestCalculators = new HashMap<>();
-
-	public Bank() {
-//		interestCalculators.put("N", new BasicInterestCalculator());
-//		interestCalculators.put("S", new SavingInterestCalculator());
-	}
 	
 	public boolean withdraw(Account account, BigDecimal amount) {
 		// check if account has enough balance
@@ -40,19 +34,13 @@ public class Bank {
 		return true;
 	}
 
-	public boolean addAccount(String name, String amount, String password) {
-		String accNo = String.format(new DecimalFormat("0000").format(++seq));
-
-		BigDecimal parsedAmount = new BigDecimal(Double.parseDouble(amount));
-		AccountList.addAccount(new Account(accNo, name, parsedAmount, password));
+	public boolean addAccount(AccountPara para) {
+		AccountList.addAccount(AccountAbstractFactory.createAccount(para));
 		return true;
 	}
 
 	// delete bank account
 	public boolean deleteAccount(String accNo, String password) {
-//		if(!login(accNo, password)) {
-//			return false;
-//		}
 		AccountList.deleteAccount(accNo, password);
 		return !AccountList.hasAccount(accNo);
 	}
@@ -72,7 +60,7 @@ public class Bank {
 		BigDecimal reducedBalance = transferAccBalance.subtract(amount);
 
 		// check if saving account eligible for transfer
-		if (transferAcc.getCategory() == "S" && transferAcc instanceof SavingAccount) {
+		if (transferAcc.getType() == AccountType.SAVING && transferAcc instanceof SavingAccount) {
 			if (((SavingAccount)transferAcc).getTargetAmount().compareTo(reducedBalance) > 0) {
 				return false;
 			}

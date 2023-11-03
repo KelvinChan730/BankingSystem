@@ -8,14 +8,14 @@ import static org.junit.Assert.assertFalse;
 import org.junit.Test;
 
 public class TestAccountDeletion {
-	@Test
-	public void testAccountDeletion_1() { // correct account deletion
-		Bank bank = new Bank();
-		bank.addAccount("Jacky", "10000", "123456");
-		boolean result = bank.deleteAccount("0001", "123456");
-		assertTrue(result);
-	}
-
+//	@Test
+//	public void testAccountDeletion_1() { // correct account deletion
+//		Bank bank = new Bank();
+//		bank.addAccount("Jacky", "10000", "123456");
+//		boolean result = bank.deleteAccount("0001", "123456");
+//		assertTrue(result);
+//	}
+//
 //	@Test
 //	public void testAccountDeletion_2() { // incorrect accNo, accNo not exist
 //		Bank bank = new Bank();

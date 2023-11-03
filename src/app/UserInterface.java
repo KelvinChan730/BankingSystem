@@ -4,11 +4,18 @@ import java.math.BigDecimal;
 
 import account.Account;
 import account.AccountList;
+import account.factory.AccountPara;
 import bank.Bank;
 import exception.IOFunctionException;
 import utility.Authentication;
 import utility.InputHandler;
 
+
+/**
+ *  Write a one-sentence summary of your robot task class here.
+ *  Follow it with additional details about its purpose, how many
+ *  robots it creates, and how to use it.
+ */
 public class UserInterface {
 	private Bank bank;
 	private InputHandler inputHandler;
@@ -106,14 +113,16 @@ public class UserInterface {
 	}
 	
 	public boolean createAccount() {
-		String accNo, password, amount;
+		String owner, password, phoneNo;
 		
 		try {
 			// prompt user and get input with verified format
-			accNo = inputHandler.promptAccNo();
-			password = inputHandler.promptPassword();
-			amount = inputHandler.promptAmount("withdraw");
-			return bank.addAccount(accNo, amount, password);
+			AccountPara para = new AccountPara();
+			para.owner = inputHandler.promptName();
+			para.password = inputHandler.promptPassword();
+			para.phoneNo = inputHandler.promptPhoneNo();
+			
+			return bank.addAccount(para);
 		} catch (IOFunctionException ioex) {
 			System.out.println("IOFunctionException thrown  :" + ioex.getMessage());
 		}
