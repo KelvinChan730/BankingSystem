@@ -8,7 +8,8 @@ import main.exception.IOErrorCode;
 import main.exception.IOFunctionException;
 
 public class InputHandler {
-	
+	Scanner scanner = new Scanner(System.in);
+
 	public boolean validateStringName(String input) {
 		// Match English letters and numbers using regular expressions.
 		String pattern = "^[a-zA-Z0-9]+$";
@@ -43,7 +44,7 @@ public class InputHandler {
 		System.out.println("Please enter your account number: ");
 		
 		String input;
-		try (Scanner scanner = new Scanner(System.in)) {
+		try /*(Scanner scanner = new Scanner(System.in))*/ {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
@@ -61,7 +62,7 @@ public class InputHandler {
 		System.out.println("Please enter the account number you wish to transfer to: ");
 		
 		String input;
-		try (Scanner scanner = new Scanner(System.in)) {
+		try /*(Scanner scanner = new Scanner(System.in))*/ {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
@@ -79,7 +80,7 @@ public class InputHandler {
 		System.out.println("Please enter your password: ");
 		
 		String input;
-		try (Scanner scanner = new Scanner(System.in)) {
+		try /*(Scanner scanner = new Scanner(System.in))*/ {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1020);
@@ -97,7 +98,7 @@ public class InputHandler {
 		System.out.println("Please enter your name: ");
 		
 		String input;
-		try (Scanner scanner = new Scanner(System.in)) {
+		try /*(Scanner scanner = new Scanner(System.in))*/ {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1030);
@@ -115,7 +116,7 @@ public class InputHandler {
 		System.out.println("Please enter your phone number: ");
 		
 		String input;
-		try (Scanner scanner = new Scanner(System.in)) {
+		try /*(Scanner scanner = new Scanner(System.in))*/ {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1060);
@@ -133,7 +134,7 @@ public class InputHandler {
 		System.out.printf("Please enter amount you wish to %s: ", verb);
 		
 		String input;
-		try (Scanner scanner = new Scanner(System.in)) {
+		try /*(Scanner scanner = new Scanner(System.in))*/ {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1040);
@@ -154,7 +155,7 @@ public class InputHandler {
 							+ "3. foreign currency account\n"
 							+ "4. exit");
 		int input = 0;
-		try (Scanner scanner = new Scanner(System.in)) {
+		try /*(Scanner scanner = new Scanner(System.in))*/ {
 			input = scanner.nextInt();
 		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1050);
@@ -179,7 +180,7 @@ public class InputHandler {
 							+ "6. payback loan\n"
 							+ "7. exit");
 		int input = 0;
-		try (Scanner scanner = new Scanner(System.in)) {
+		try /*(Scanner scanner = new Scanner(System.in))*/ {
 			input = scanner.nextInt();
 		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1050);
