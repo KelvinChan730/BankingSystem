@@ -179,7 +179,8 @@ public class InputHandler {
 							+ "4. transfer\n"
 							+ "5. loan\n"
 							+ "6. payback loan\n"
-							+ "7. exit");
+							+ "7. Change Account Currency Type"
+							+ "8. exit");
 		int input = 0;
 		try /*(Scanner scanner = new Scanner(System.in))*/ {
 			input = scanner.nextInt();
@@ -188,8 +189,26 @@ public class InputHandler {
 		}
 		
 		// check withdraw amount format
-		if(input < 1 || input > 7) {
+		if(input < 1 || input > 8) {
 			throw new IOFunctionException(IOErrorCode.E1210);
+		}
+		
+		return input;
+	}
+
+		public String promptLoanID() throws IOFunctionException {
+		System.out.println("Please enter your Loan ID: ");
+		
+		String input;
+		try /*(Scanner scanner = new Scanner(System.in))*/ {
+			input = scanner.nextLine();
+		} catch(InputMismatchException ex) {
+			throw new IOFunctionException(IOErrorCode.E1010);
+		}
+		
+		// Load ID should only contain digits
+		if(!containsOnlyDigits(input)) {
+			throw new IOFunctionException(IOErrorCode.E1010);
 		}
 		
 		return input;

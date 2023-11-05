@@ -1,6 +1,7 @@
 package main.bank;
 
 import main.account.Account;
+import main.account.ForeignCurrencyAccount;
 import main.account.Loan;
 import main.account.SavingAccount;
 import main.account.factory.AccountFactory;
@@ -77,7 +78,7 @@ public class Bank {
 		return true;
 	}
 
-	public boolean loan(String accNo, String password, String userExpectLoan) {
+	public boolean loan(Account acc, BigDecimal userExpectLoan) {
 //		// check do user login successfully
 //		if (!login(accNo, password)) {
 //			return false;
@@ -87,13 +88,11 @@ public class Bank {
 //			return false;
 //		}
 		// if user expect loan equal to 0, return false
-		if (new BigDecimal(userExpectLoan).compareTo(BigDecimal.ZERO) == 0) {
+		if (userExpectLoan.compareTo(BigDecimal.ZERO) == 0) {
 			return false;
 		}
-		// get the user account
-		Account userAccount = AccountList.findAccount(accNo);
 		// get the user balance
-		BigDecimal userBalance = userAccount.getBalance();
+		BigDecimal userBalance = acc.getBalance();
 		// check do the user balance > than 1 million
 		int comparisonResult0 = userBalance.compareTo(new BigDecimal("1000000"));
 		// check do the user balance > than 500 thousand
@@ -112,17 +111,17 @@ public class Bank {
 			maxLoan = new BigDecimal("0");
 		}
 		// check is the user except loan available
-		int checkLoanAvailable = maxLoan.compareTo(new BigDecimal(userExpectLoan));
+		int checkLoanAvailable = maxLoan.compareTo(userExpectLoan);
 		if (checkLoanAvailable < 0) {
 			result = false;
 		} else {
 			result = true;
-			loadList.addLoanRecord(new Loan(accNo, new BigDecimal(userExpectLoan)));
+			loadList.addLoanRecord(new Loan(acc.getAccNo(), userExpectLoan));
 		}
 		return result;
 	}
 
-	public boolean payBack(String accNo, String password, String loanId) {
+	public boolean payBack(Account acc, String loanId) {
 //		// check do user login successfully
 //		if (!login(accNo, password)) {
 //			return false;
@@ -131,10 +130,8 @@ public class Bank {
 //		if (!containsOnlyDigits(loanId)) {
 //			return false;
 //		}
-		// get the user account
-		Account userAccount = AccountList.findAccount(accNo);
 		// get the user balance
-		BigDecimal userBalance = userAccount.getBalance();
+		BigDecimal userBalance = acc.getBalance();
 		Loan record = loadList.findLoadRecord(loanId);
 		if (record == null) {
 			return false;
@@ -160,7 +157,7 @@ public class Bank {
 		boolean result;
 		if (enoughBalance>=0) {
 			BigDecimal currentBalance = userBalance.subtract(payBackAmount);
-			userAccount.setBalance(currentBalance);
+			acc.setBalance(currentBalance);
 			record.payBackSuccessful();
 			result = true;
 			
@@ -170,8 +167,11 @@ public class Bank {
 			return result;
 	}
 
-	public boolean balanceExchange(Account account, Currency targetCurrencyType){
+	public boolean currencyTypeExchange(ForeignCurrencyAccount account, Currency targetCurrencyType){
+		if (account.getCurrencyType()==targetCurrencyType){
+			return false;
+		}
 		account.setBalance(account.getBalance().multiply(targetCurrencyType.getExchangeRate()));
-		return false;
+		return true;
 	}
 }

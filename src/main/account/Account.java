@@ -9,12 +9,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Account implements IAccount{
-	protected final AccountType type = AccountType.NORMAL;
+	protected final AccountType accountType = AccountType.NORMAL;
     protected String accNo;							// account number
     protected String owner;							// owner
     protected BigDecimal balance;					// balance
     protected String password;						// password
     protected String phoneNo;						// phone number
+    protected final Currency currencytype = Currency.HKD;
     protected ArrayList<String> loanRecordId = new ArrayList<String>();
     
     public Account(String accNo, AbstractAccountPara para) {
@@ -47,11 +48,11 @@ public class Account implements IAccount{
     }
 
     public AccountType getType() {
-        return type;
+        return accountType;
     }
     
     public Currency getCurrencyType() {
-        return Currency.HKD;
+        return currencytype;
     }
     
     public String getPassword() {
@@ -74,7 +75,7 @@ public class Account implements IAccount{
     @Override
     public String toString(){
         return String.format("Account type: %s | Account number: %s | Account holder: %s | Balance: %s",
-                type.name(), accNo, owner, Formatter.formatBalance(balance));
+                accountType.name(), accNo, owner, Formatter.formatBalance(balance));
     }
 
     @Override

@@ -3,12 +3,14 @@ package main.app;
 import java.math.BigDecimal;
 
 import main.account.Account;
+import main.account.ForeignCurrencyAccount;
 import main.account.factory.AccountPara;
 import main.bank.Bank;
 import main.db.AccountList;
 import main.exception.IOFunctionException;
 import main.utility.Authentication;
 import main.utility.InputHandler;
+import main.constant.AccountType;
 import main.constant.Currency;
 
 
@@ -131,10 +133,35 @@ public class UserInterface {
 		return false;
 	}
 
+	public boolean loan(Account acc){
+		try {
+			String loanAmount = inputHandler.promptAmount("loan");
+			BigDecimal amount = new BigDecimal(loanAmount);
+			return bank.loan(acc, amount);
+		} catch (IOFunctionException ioex) {
+			System.out.println("IOFunctionException thrown  :" + ioex.getMessage());
+		}
+		return false;
+	}
+
+	public boolean payBack(Account acc){
+		try {
+			String loanID = inputHandler.promptLoanID();
+			return bank.payBack(acc, loanID);
+		} catch (IOFunctionException ioex) {
+			System.out.println("IOFunctionException thrown  :" + ioex.getMessage());
+		}
+		return false;
+	}
+
 	public boolean foreignCurrencyExchange(Account acc){
+		if (acc.getType()!=AccountType.FOREIGN_CURRENCY) {
+			System.out.println("Only Foreign Currency Account can change the currency type");
+			return false;
+		}
 		try {
 			Currency targetCurrencyType = inputHandler.promptCurrencyType();
-			return bank.balanceExchange(acc, targetCurrencyType);
+			return bank.currencyTypeExchange((ForeignCurrencyAccount)acc, targetCurrencyType);
 		} catch (IOFunctionException ioex) {
 			System.out.println("IOFunctionException thrown  :" + ioex.getMessage());
 		}

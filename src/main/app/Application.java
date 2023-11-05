@@ -54,12 +54,15 @@ public class Application {
 				ui.transfer(userAcc);
 				break;
 			case 5:
-				ui.foreignCurrencyExchange(userAcc);
+				ui.loan(userAcc); // In progess
 				break;
 			case 6:
-				// todo
+				ui.payBack(userAcc); //In progress
 				break;
 			case 7:
+				ui.foreignCurrencyExchange(userAcc); // In progress
+				break;
+			case 8:
 				isContinue = false;
 				break;
 			default:
@@ -67,6 +70,7 @@ public class Application {
 				break;
 			}
         }
+		System.out.println("logout successfully!");
 	}
 	
 	public static void main(String[] args) {
