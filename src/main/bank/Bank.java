@@ -6,6 +6,8 @@ import main.account.SavingAccount;
 import main.account.factory.AccountFactory;
 import main.account.factory.AccountPara;
 import main.constant.AccountType;
+import main.constant.Currency;
+
 import main.db.AccountList;
 import main.db.LoanList;
 
@@ -166,5 +168,10 @@ public class Bank {
 			result = false;
 		}
 			return result;
+	}
+
+	public boolean balanceExchange(Account account, Currency targetCurrencyType){
+		account.setBalance(account.getBalance().multiply(targetCurrencyType.getExchangeRate()));
+		return false;
 	}
 }

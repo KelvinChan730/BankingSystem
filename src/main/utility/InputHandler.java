@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import main.exception.IOErrorCode;
 import main.exception.IOFunctionException;
+import main.constant.Currency;
 
 public class InputHandler {
 	Scanner scanner = new Scanner(System.in);
@@ -192,5 +193,23 @@ public class InputHandler {
 		}
 		
 		return input;
+	}
+
+	public Currency promptCurrencyType() throws IOFunctionException{
+		System.out.println("\nSelect an Foreign Currency Type\n");
+		int i;
+		for (i=1; i<=Currency.values().length; i++){
+			System.out.println(i + ". " + Currency.values()[i-1]);
+		}
+		int input;
+		try /*(Scanner scanner = new Scanner(System.in))*/ {
+			input = scanner.nextInt();
+		} catch (InputMismatchException ex) {
+			throw new IOFunctionException(IOErrorCode.E1050);
+		}
+		if (input-1 < 0 || input-1 >= Currency.values().length) {
+			throw new IOFunctionException(IOErrorCode.E1220);
+		}
+		return Currency.values()[input];
 	}
 }

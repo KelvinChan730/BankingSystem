@@ -9,6 +9,7 @@ import main.db.AccountList;
 import main.exception.IOFunctionException;
 import main.utility.Authentication;
 import main.utility.InputHandler;
+import main.constant.Currency;
 
 
 /**
@@ -122,12 +123,21 @@ public class UserInterface {
 			owner = inputHandler.promptName();
 			password = inputHandler.promptPassword();
 			phoneNo = inputHandler.promptPhoneNo();
-			
 			return bank.addAccount(new AccountPara(owner, password, phoneNo));
 		} catch (IOFunctionException ioex) {
 			System.out.println("IOFunctionException thrown  :" + ioex.getMessage());
 		}
 
+		return false;
+	}
+
+	public boolean foreignCurrencyExchange(Account acc){
+		try {
+			Currency targetCurrencyType = inputHandler.promptCurrencyType();
+			return bank.balanceExchange(acc, targetCurrencyType);
+		} catch (IOFunctionException ioex) {
+			System.out.println("IOFunctionException thrown  :" + ioex.getMessage());
+		}
 		return false;
 	}
 }

@@ -17,7 +17,8 @@ public enum IOErrorCode implements IErrorCode{
     
     // Input Value IO Error;
     E1200("Invalid Account Type Option"),
-    E1210("Invalid Menu Option");
+    E1210("Invalid Menu Option"),
+    E1220("Invalid Currency Type");
 	
 	private String errMsg;
 	

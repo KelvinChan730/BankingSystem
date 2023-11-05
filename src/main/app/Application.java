@@ -54,7 +54,7 @@ public class Application {
 				ui.transfer(userAcc);
 				break;
 			case 5:
-				// todo
+				ui.foreignCurrencyExchange(userAcc);
 				break;
 			case 6:
 				// todo

@@ -25,7 +25,7 @@ public enum Currency {
     public String getName() {
     	return name;
     }
-    
+
     public BigDecimal getExchangeRate() {
     	return exchangeRate;
     }
