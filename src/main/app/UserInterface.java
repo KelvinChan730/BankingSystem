@@ -39,12 +39,14 @@ public class UserInterface {
 
 		//check do the account exist 
 		if(!AccountList.hasAccount(accNo)) {
+			System.out.println("Account or Passwword Not Found");
 			return null;
 		}
 
 		// check do the password equal
 		Account existAccount = AccountList.findAccount(accNo);
 		if(!password.equals(existAccount.getPassword())) {
+			System.out.println("Account or Passwword Not Found");
 			return null;
 		}
 		
