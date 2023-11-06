@@ -1,7 +1,7 @@
 package main.account.factory;
 
-public class AbstractAccountPara {
+public abstract class BaseAccountInfo {
     public String owner;						// owner
     public String password;						// password
-    public String phoneNo;				// phone number
+    public String phoneNo;						// phone number
 }

@@ -3,9 +3,9 @@ package main.account.factory;
 import main.account.Account;
 import main.account.ForeignCurrencyAccount;
 import main.account.SavingAccount;
-import main.db.Sequenced;
+import main.db.SequencedRecordCreator;
 
-public class AccountFactory extends Sequenced {
+public class AccountFactory extends SequencedRecordCreator {
 	private static AccountFactory instance = null;
 	
 	private AccountFactory() {}
@@ -16,18 +16,18 @@ public class AccountFactory extends Sequenced {
 		return instance;
 	}
 	
-	public Account createAccount(AccountPara para) {
+	public Account createAccount(AccountInfo accInfo) {
 		String accNo = getSequence();
-		return new Account(accNo, para);
+		return new Account(accNo, accInfo);
 	}
 	
-	public SavingAccount createSavingAccount(SavingAccountPara para) {
+	public SavingAccount createAccount(SavingAccountInfo accInfo) {
 		String accNo = getSequence();
-		return new SavingAccount(accNo, para);
+		return new SavingAccount(accNo, accInfo);
 	}
 	
-	public ForeignCurrencyAccount createForeignCurrencyAccount(ForeignCurrencyAccountPara para) {
+	public ForeignCurrencyAccount createAccount(ForeignCurrencyAccountInfo accInfo) {
 		String accNo = getSequence();
-		return new ForeignCurrencyAccount(accNo, para);
+		return new ForeignCurrencyAccount(accNo, accInfo);
 	}
 }

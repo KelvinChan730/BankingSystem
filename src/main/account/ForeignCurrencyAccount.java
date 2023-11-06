@@ -1,16 +1,20 @@
 package main.account;
 
-import main.account.factory.ForeignCurrencyAccountPara;
+import java.math.BigDecimal;
+
+import main.account.factory.ForeignCurrencyAccountInfo;
 import main.constant.AccountType;
 import main.constant.Currency;
 
-public class ForeignCurrencyAccount extends Account {
+public class ForeignCurrencyAccount extends BaseAccount implements IAccount {
 	protected final AccountType accountType = AccountType.FOREIGN_CURRENCY;		// account type = foreign currency
-	private Currency currencyType;									// currency type
+	private Currency currencyType;												// currency type
+	private ForeignCurrencyAccountInfo accountInfo;
 	
-	public ForeignCurrencyAccount(String accNo, ForeignCurrencyAccountPara para) {
-        super(accNo, para);
-        this.currencyType = para.currencyType;
+	public ForeignCurrencyAccount(String accNo, ForeignCurrencyAccountInfo accInfo) {
+		this.accNo = accNo;
+        this.balance = BigDecimal.ZERO;
+        this.accountInfo = accInfo;
     }
 
 	public Currency getCurrencyType() {

@@ -2,16 +2,17 @@ package main.app;
 
 import java.math.BigDecimal;
 
+import main.account.BaseAccount;
 import main.account.Account;
 import main.account.ForeignCurrencyAccount;
-import main.account.factory.AccountPara;
+import main.account.factory.AccountInfo;
 import main.bank.Bank;
+import main.constant.AccountType;
+import main.constant.Currency;
 import main.db.AccountList;
 import main.exception.IOFunctionException;
 import main.utility.Authentication;
 import main.utility.InputHandler;
-import main.constant.AccountType;
-import main.constant.Currency;
 
 
 /**
@@ -125,7 +126,7 @@ public class UserInterface {
 			owner = inputHandler.promptName();
 			password = inputHandler.promptPassword();
 			phoneNo = inputHandler.promptPhoneNo();
-			return bank.addAccount(new AccountPara(owner, password, phoneNo));
+			return bank.addAccount(new AccountInfo(owner, password, phoneNo));
 		} catch (IOFunctionException ioex) {
 			System.out.println("IOFunctionException thrown  :" + ioex.getMessage());
 		}
@@ -154,8 +155,8 @@ public class UserInterface {
 		return false;
 	}
 
-	public boolean foreignCurrencyExchange(Account acc){
-		if (acc.getType()!=AccountType.FOREIGN_CURRENCY) {
+	public boolean foreignCurrencyExchange(BaseAccount acc){
+		if (acc.getType() != AccountType.FOREIGN_CURRENCY) {
 			System.out.println("Only Foreign Currency Account can change the currency type");
 			return false;
 		}

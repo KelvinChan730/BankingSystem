@@ -1,7 +1,7 @@
 package main.app;
 
 import main.account.Account;
-import main.account.factory.AccountPara;
+import main.account.factory.AccountInfo;
 import main.bank.Bank;
 import main.db.AccountList;
 import main.utility.Authentication;
@@ -15,9 +15,9 @@ public class Application {
 	
 	// function to simulate loading existing records
 	public static void loadRecords() {
-		AccountPara para1 = new AccountPara("John", "135791", "12345678");
+		AccountInfo para1 = new AccountInfo("John", "135791", "12345678");
 		bank.addAccount(para1);
-		AccountPara para2 = new AccountPara("Jane", "123456", "98765432");
+		AccountInfo para2 = new AccountInfo("Jane", "123456", "98765432");
 		bank.addAccount(para2);
 	}
 	

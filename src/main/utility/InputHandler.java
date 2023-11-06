@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import main.constant.Currency;
 import main.exception.IOErrorCode;
 import main.exception.IOFunctionException;
-import main.constant.Currency;
 
 public class InputHandler {
 	Scanner scanner = new Scanner(System.in);

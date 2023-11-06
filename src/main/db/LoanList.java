@@ -5,10 +5,8 @@ import java.util.HashMap;
 
 import main.account.Account;
 import main.account.Loan;
-import main.account.factory.AccountFactory;
-import main.utility.Formatter;
 
-public class LoanList extends Sequenced {
+public class LoanList extends SequencedRecordCreator {
 	private static LoanList instance = null;
 	private HashMap<String, Loan> loadRecordList = new HashMap<>();
 	
@@ -29,7 +27,7 @@ public class LoanList extends Sequenced {
 		String loanId = getSequence();
 		loadRecordList.put(loanId, loan);
 		Account user = AccountList.findAccount(loan.getAccountId());
-		user.addLoanRecord(loanId);
+		user.addLoanRecordId(loanId);
 	}
 
 	// return if account loan exist

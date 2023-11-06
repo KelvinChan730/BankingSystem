@@ -1,14 +1,14 @@
 package main.bank;
 
+import main.account.BaseAccount;
 import main.account.Account;
 import main.account.ForeignCurrencyAccount;
 import main.account.Loan;
 import main.account.SavingAccount;
 import main.account.factory.AccountFactory;
-import main.account.factory.AccountPara;
+import main.account.factory.AccountInfo;
 import main.constant.AccountType;
 import main.constant.Currency;
-
 import main.db.AccountList;
 import main.db.LoanList;
 
@@ -17,6 +17,18 @@ import java.math.BigDecimal;
 public class Bank {
 	private AccountFactory accFactory = AccountFactory.getInstance();
 	private LoanList loadList = LoanList.getInstance();
+	
+	// create bank account
+	public boolean addAccount(AccountInfo para) {
+		AccountList.addAccount(accFactory.createAccount(para));
+		return true;
+	}
+
+	// delete bank account
+	public boolean deleteAccount(String accNo, String password) {
+		AccountList.deleteAccount(accNo, password);
+		return !AccountList.hasAccount(accNo);
+	}
 	
 	public boolean withdraw(Account account, BigDecimal amount) {
 		// check if account has enough balance
@@ -29,6 +41,7 @@ public class Bank {
 		account.setBalance(afterWithdraw);
 		return true;
 	}
+	
 	public boolean deposit(Account account, BigDecimal amount) {
 		BigDecimal accountBalance = account.getBalance();
 
@@ -37,20 +50,8 @@ public class Bank {
 		return true;
 	}
 	
-
-	public boolean addAccount(AccountPara para) {
-		AccountList.addAccount(accFactory.createAccount(para));
-		return true;
-	}
-
-	// delete bank account
-	public boolean deleteAccount(String accNo, String password) {
-		AccountList.deleteAccount(accNo, password);
-		return !AccountList.hasAccount(accNo);
-	}
-	
 	// transfer amount of account currency to target account
-	public boolean transfer(Account transferAcc, String targetAccNo, BigDecimal amount) {
+	public boolean transfer(BaseAccount transferAcc, String targetAccNo, BigDecimal amount) {
 		// check if transfer account exists
 		if (!AccountList.hasAccount(targetAccNo)) {
 			return false;
