@@ -1,4 +1,4 @@
-package main.utility;
+package main.app;
 
 import java.math.BigDecimal;
 import java.util.InputMismatchException;
@@ -10,7 +10,12 @@ import main.exception.IOFunctionException;
 
 public class InputHandler {
 	private Scanner scanner = new Scanner(System.in);
+	private ApplicationView view;
 	private String input = "";
+
+	public InputHandler(ApplicationView view) {
+		this.view = view;
+	}
 
 	public boolean validateStringName(String input) {
 		// Match English letters and numbers using regular expressions.
@@ -43,7 +48,7 @@ public class InputHandler {
 	}
 	
 	public String promptAccNo() throws IOFunctionException {
-		System.out.println("Please enter your account number: ");
+		view.display("Please enter your account number: ");
 
 		try {
 			input = scanner.nextLine();
@@ -60,7 +65,7 @@ public class InputHandler {
 	}
 	
 	public String promptTransferAccNo() throws IOFunctionException {
-		System.out.println("Please enter the account number you wish to transfer to: ");
+		view.display("Please enter the account number you wish to transfer to: ");
 
 		try {
 			input = scanner.nextLine();
@@ -77,7 +82,7 @@ public class InputHandler {
 	}
 	
 	public String promptPassword() throws IOFunctionException {
-		System.out.println("Please enter your password: ");
+		view.display("Please enter your password: ");
 
 		try {
 			input = scanner.nextLine();
@@ -94,7 +99,7 @@ public class InputHandler {
 	}
 	
 	public String promptName() throws IOFunctionException {
-		System.out.println("Please enter your name: ");
+		view.display("Please enter your name: ");
 
 		try {
 			input = scanner.nextLine();
@@ -111,7 +116,7 @@ public class InputHandler {
 	}
 	
 	public String promptPhoneNo() throws IOFunctionException {
-		System.out.println("Please enter your phone number: ");
+		view.display("Please enter your phone number: ");
 
 		try {
 			input = scanner.nextLine();
@@ -128,7 +133,7 @@ public class InputHandler {
 	}
 	
 	public String promptAmount(String verb) throws IOFunctionException {
-		System.out.printf("Please enter amount you wish to %s: ", verb);
+		view.display(String.format("Please enter amount you wish to %s: ", verb));
 
 		try {
 			input = scanner.nextLine();
@@ -145,11 +150,11 @@ public class InputHandler {
 	}
 	
 	public int promptAccountOption() throws IOFunctionException {
-		System.out.println( "\nSelect an account type to create\n"
-							+ "1. normal account\n"
-							+ "2. saving account\n"
-							+ "3. foreign currency account\n"
-							+ "4. exit");
+		view.display( "\nSelect an account type to create\n"
+					+ "1. normal account\n"
+					+ "2. saving account\n"
+					+ "3. foreign currency account\n"
+					+ "4. exit");
 
 		int intInput = 0;
 		try {
@@ -168,16 +173,16 @@ public class InputHandler {
 	}
 	
 	public int promptMenuOption() throws IOFunctionException {
-		System.out.println( "\nSelect an option\n"
-							+ "Menu:\n"
-							+ "1. show account info\n"
-							+ "2. withdrawal\n"
-							+ "3. deposit\n"
-							+ "4. transfer\n"
-							+ "5. loan\n"
-							+ "6. payback loan\n"
-							+ "7. Change Account Currency Type\n"
-							+ "8. exit\n");
+		view.display( "\nSelect an option\n"
+					+ "Menu:\n"
+					+ "1. show account info\n"
+					+ "2. withdrawal\n"
+					+ "3. deposit\n"
+					+ "4. transfer\n"
+					+ "5. loan\n"
+					+ "6. payback loan\n"
+					+ "7. Change Account Currency Type\n"
+					+ "8. exit\n");
 
 		int intInput = 0;
 		try {
@@ -196,7 +201,7 @@ public class InputHandler {
 	}
 
 		public String promptLoanID() throws IOFunctionException {
-		System.out.println("Please enter your Loan ID: ");
+			view.display("Please enter your Loan ID: ");
 
 		try {
 			input = scanner.nextLine();
@@ -213,9 +218,9 @@ public class InputHandler {
 	}
 
 	public Currency promptCurrencyType() throws IOFunctionException{
-		System.out.println("\nSelect an Foreign Currency Type\n");
+		view.display("\nSelect an Foreign Currency Type\n");
 		for (int i = 1; i <= Currency.values().length; i++){
-			System.out.println(i + ". " + Currency.values()[i - 1]);
+			view.display(i + ". " + Currency.values()[i - 1]);
 		}
 
 		int intInput = 0;

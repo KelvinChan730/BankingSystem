@@ -7,6 +7,7 @@ import main.account.Loan;
 import main.account.SavingAccount;
 import main.account.factory.AccountFactory;
 import main.account.factory.AccountInfo;
+import main.bank.operation.TransferOperation;
 import main.constant.AccountType;
 import main.constant.Currency;
 import main.db.AccountList;
@@ -17,7 +18,12 @@ import java.math.BigDecimal;
 public class Bank {
 	private AccountFactory accFactory = AccountFactory.getInstance();
 	private LoanList loadList = LoanList.getInstance();
-	
+
+
+	public void showAccountInfo(BaseAccount acc) {
+		System.out.println(acc.toString());
+	}
+
 	// create bank account
 	public boolean addAccount(AccountInfo para) {
 		AccountList.addAccount(accFactory.createAccount(para));
@@ -30,7 +36,7 @@ public class Bank {
 		return !AccountList.hasAccount(accNo);
 	}
 	
-	public boolean withdraw(Account account, BigDecimal amount) {
+	public boolean withdraw(BaseAccount account, BigDecimal amount) {
 		// check if account has enough balance
 		BigDecimal accountBalance = account.getBalance();
 		int compare = amount.compareTo(accountBalance);
@@ -42,7 +48,7 @@ public class Bank {
 		return true;
 	}
 	
-	public boolean deposit(Account account, BigDecimal amount) {
+	public boolean deposit(BaseAccount account, BigDecimal amount) {
 		BigDecimal accountBalance = account.getBalance();
 
 		BigDecimal afterDeposit = accountBalance.add(amount);
@@ -51,18 +57,18 @@ public class Bank {
 	}
 	
 	// transfer amount of account currency to target account
-	public boolean transfer(BaseAccount transferAcc, String targetAccNo, BigDecimal amount) {
+	public boolean transfer(BaseAccount transferAcc, TransferOperation transferOp) {
 		// check if transfer account exists
-		if (!AccountList.hasAccount(targetAccNo)) {
+		if (!AccountList.hasAccount(transferOp.targetAccNo)) {
 			return false;
 		}
-		Account targetAcc = AccountList.findAccount(targetAccNo);
+		Account targetAcc = AccountList.findAccount(transferOp.targetAccNo);
 		
 		BigDecimal transferAccBalance = transferAcc.getBalance();
-		if (transferAccBalance.compareTo(amount) < 0 || amount.compareTo(BigDecimal.ZERO) <= 0)
+		if (transferAccBalance.compareTo(transferOp.amount) < 0 || transferOp.amount.compareTo(BigDecimal.ZERO) <= 0)
 			return false;
 		
-		BigDecimal reducedBalance = transferAccBalance.subtract(amount);
+		BigDecimal reducedBalance = transferAccBalance.subtract(transferOp.amount);
 
 		// check if saving account eligible for transfer
 		if (transferAcc.getType() == AccountType.SAVING && transferAcc instanceof SavingAccount) {
@@ -71,15 +77,15 @@ public class Bank {
 			}
 		}
 		
-		transferAcc.setBalance(transferAccBalance.subtract(amount));
-		BigDecimal amountHKD = amount.multiply(transferAcc.getCurrencyType().getExchangeRate());
+		transferAcc.setBalance(transferAccBalance.subtract(transferOp.amount));
+		BigDecimal amountHKD = transferOp.amount.multiply(transferAcc.getCurrencyType().getExchangeRate());
 		BigDecimal amountTargetCurrency = amountHKD.divide(targetAcc.getCurrencyType().getExchangeRate());
 		BigDecimal targetBalance = targetAcc.getBalance().add(amountTargetCurrency);
 		targetAcc.setBalance(targetBalance);
 		return true;
 	}
 
-	public boolean loan(Account acc, BigDecimal userExpectLoan) {
+	public boolean loan(BaseAccount acc, BigDecimal userExpectLoan) {
 //		// check do user login successfully
 //		if (!login(accNo, password)) {
 //			return false;
@@ -122,7 +128,7 @@ public class Bank {
 		return result;
 	}
 
-	public boolean payBack(Account acc, String loanId) {
+	public boolean payBack(BaseAccount acc, String loanId) {
 //		// check do user login successfully
 //		if (!login(accNo, password)) {
 //			return false;
