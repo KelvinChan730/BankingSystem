@@ -9,7 +9,8 @@ import main.exception.IOErrorCode;
 import main.exception.IOFunctionException;
 
 public class InputHandler {
-	Scanner scanner = new Scanner(System.in);
+	private Scanner scanner = new Scanner(System.in);
+	private String input = "";
 
 	public boolean validateStringName(String input) {
 		// Match English letters and numbers using regular expressions.
@@ -43,9 +44,8 @@ public class InputHandler {
 	
 	public String promptAccNo() throws IOFunctionException {
 		System.out.println("Please enter your account number: ");
-		
-		String input;
-		try /*(Scanner scanner = new Scanner(System.in))*/ {
+
+		try {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
@@ -61,9 +61,8 @@ public class InputHandler {
 	
 	public String promptTransferAccNo() throws IOFunctionException {
 		System.out.println("Please enter the account number you wish to transfer to: ");
-		
-		String input;
-		try /*(Scanner scanner = new Scanner(System.in))*/ {
+
+		try {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
@@ -79,9 +78,8 @@ public class InputHandler {
 	
 	public String promptPassword() throws IOFunctionException {
 		System.out.println("Please enter your password: ");
-		
-		String input;
-		try /*(Scanner scanner = new Scanner(System.in))*/ {
+
+		try {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1020);
@@ -97,9 +95,8 @@ public class InputHandler {
 	
 	public String promptName() throws IOFunctionException {
 		System.out.println("Please enter your name: ");
-		
-		String input;
-		try /*(Scanner scanner = new Scanner(System.in))*/ {
+
+		try {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1030);
@@ -115,9 +112,8 @@ public class InputHandler {
 	
 	public String promptPhoneNo() throws IOFunctionException {
 		System.out.println("Please enter your phone number: ");
-		
-		String input;
-		try /*(Scanner scanner = new Scanner(System.in))*/ {
+
+		try {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1060);
@@ -133,9 +129,8 @@ public class InputHandler {
 	
 	public String promptAmount(String verb) throws IOFunctionException {
 		System.out.printf("Please enter amount you wish to %s: ", verb);
-		
-		String input;
-		try /*(Scanner scanner = new Scanner(System.in))*/ {
+
+		try {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1040);
@@ -155,19 +150,21 @@ public class InputHandler {
 							+ "2. saving account\n"
 							+ "3. foreign currency account\n"
 							+ "4. exit");
-		int input = 0;
-		try /*(Scanner scanner = new Scanner(System.in))*/ {
-			input = scanner.nextInt();
-		} catch (InputMismatchException ex) {
+
+		int intInput = 0;
+		try {
+			input = scanner.nextLine();
+			intInput = Integer.parseInt(input);
+		} catch (InputMismatchException | NumberFormatException ex) {
 			throw new IOFunctionException(IOErrorCode.E1050);
 		}
-		
+
 		// check withdraw amount format
-		if(input < 1 || input > 4) {
+		if(intInput < 1 || intInput > 4) {
 			throw new IOFunctionException(IOErrorCode.E1200);
 		}
 		
-		return input;
+		return intInput;
 	}
 	
 	public int promptMenuOption() throws IOFunctionException {
@@ -179,28 +176,29 @@ public class InputHandler {
 							+ "4. transfer\n"
 							+ "5. loan\n"
 							+ "6. payback loan\n"
-							+ "7. Change Account Currency Type"
-							+ "8. exit");
-		int input = 0;
-		try /*(Scanner scanner = new Scanner(System.in))*/ {
-			input = scanner.nextInt();
-		} catch (InputMismatchException ex) {
+							+ "7. Change Account Currency Type\n"
+							+ "8. exit\n");
+
+		int intInput = 0;
+		try {
+			input = scanner.nextLine();
+			intInput = Integer.parseInt(input);
+		} catch (InputMismatchException | NumberFormatException ex) {
 			throw new IOFunctionException(IOErrorCode.E1050);
 		}
-		
+
 		// check withdraw amount format
-		if(input < 1 || input > 8) {
+		if(intInput < 1 || intInput > 8) {
 			throw new IOFunctionException(IOErrorCode.E1210);
 		}
 		
-		return input;
+		return intInput;
 	}
 
 		public String promptLoanID() throws IOFunctionException {
 		System.out.println("Please enter your Loan ID: ");
-		
-		String input;
-		try /*(Scanner scanner = new Scanner(System.in))*/ {
+
+		try {
 			input = scanner.nextLine();
 		} catch(InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
@@ -216,19 +214,21 @@ public class InputHandler {
 
 	public Currency promptCurrencyType() throws IOFunctionException{
 		System.out.println("\nSelect an Foreign Currency Type\n");
-		int i;
-		for (i=1; i<=Currency.values().length; i++){
-			System.out.println(i + ". " + Currency.values()[i-1]);
+		for (int i = 1; i <= Currency.values().length; i++){
+			System.out.println(i + ". " + Currency.values()[i - 1]);
 		}
-		int input;
-		try /*(Scanner scanner = new Scanner(System.in))*/ {
-			input = scanner.nextInt();
-		} catch (InputMismatchException ex) {
+
+		int intInput = 0;
+		try {
+			input = scanner.nextLine();
+			intInput = Integer.parseInt(input);
+		} catch (InputMismatchException | NumberFormatException ex) {
 			throw new IOFunctionException(IOErrorCode.E1050);
 		}
-		if (input-1 < 0 || input-1 >= Currency.values().length) {
+
+		if (intInput < 1 || intInput > Currency.values().length) {
 			throw new IOFunctionException(IOErrorCode.E1220);
 		}
-		return Currency.values()[input];
+		return Currency.values()[intInput];
 	}
 }
