@@ -26,14 +26,14 @@ public class FormatVerifier {
     // Check if string only contains English letters, numbers, and underscores using regular expressions.
     public static boolean validateStringPassword(String input) {
         if (stringPasswordPattern == null)
-            stringPasswordPattern = Pattern.compile("^[a-zA-Z0-9]+$");
+            stringPasswordPattern = Pattern.compile("^[a-zA-Z0-9_]+$");
         return stringPasswordPattern.matcher(input).matches();
     }
 
     // Check if match BigDecimal format using regular expressions.
     public static boolean validateBigDecimalFormat(String input) {
         if (bigDecimalFormatPattern == null)
-            bigDecimalFormatPattern = Pattern.compile("^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$");
+            bigDecimalFormatPattern = Pattern.compile("^(?:-?)(?:0|(?:[1-9][0-9]*))(?:\\.[0-9]+)?$");
         return bigDecimalFormatPattern.matcher(input).matches();
     }
 
