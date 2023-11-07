@@ -23,10 +23,16 @@
 hs_err_pid*
 
 ### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
+# Default ignored files
+.idea/shelf/
+.idea/workspace.xml
+# Editor-based HTTP Client requests
+.idea/httpRequests/
+# Datasource local storage ignored files
+.idea/dataSources/
+.idea/dataSources.local.xml
+# *.iws
+# *.ipr
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
