@@ -7,6 +7,7 @@ import java.util.Scanner;
 import main.constant.Currency;
 import main.exception.IOErrorCode;
 import main.exception.IOFunctionException;
+import main.utility.FormatVerifier;
 
 public class InputHandler {
 	private Scanner scanner = new Scanner(System.in);
@@ -15,36 +16,6 @@ public class InputHandler {
 
 	public InputHandler(ApplicationView view) {
 		this.view = view;
-	}
-
-	public boolean validateStringName(String input) {
-		// Match English letters and numbers using regular expressions.
-		String pattern = "^[a-zA-Z0-9]+$";
-		return input.matches(pattern);
-	}
-
-	public boolean validateBigDecimalFormat(String input) {
-		String pattern = "^(-?)(0|([1-9][0-9]*))(\\.[0-9]+)?$";
-		return input.matches(pattern);
-	}
-
-	public boolean validateBigDecimal(String parameter) {
-		// Check if the parameter is of type BigDecimal.
-		if (validateBigDecimalFormat(parameter)) {
-			BigDecimal number = new BigDecimal(parameter);
-			return number.compareTo(BigDecimal.ZERO) >= 0;
-		}
-		return false;
-	}
-
-	public boolean validateStringPassword(String input) {
-		// Match English letters, numbers, and underscores using regular expressions.
-		String pattern = "^[a-zA-Z0-9_]+$";
-		return input.matches(pattern);
-	}
-
-	public boolean containsOnlyDigits(String str) {
-	    return str.matches("\\d+");
 	}
 	
 	public String promptAccNo() throws IOFunctionException {
@@ -57,7 +28,7 @@ public class InputHandler {
 		}
 		
 		// check account number format
-		if(!containsOnlyDigits(input)) {
+		if(!FormatVerifier.containsOnlyDigits(input)) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
 		
@@ -74,7 +45,7 @@ public class InputHandler {
 		}
 		
 		// check account number format
-		if(!containsOnlyDigits(input)) {
+		if(!FormatVerifier.containsOnlyDigits(input)) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
 		
@@ -91,7 +62,7 @@ public class InputHandler {
 		}
 		
 		// check password format
-		if(!validateStringPassword(input)) {
+		if(!FormatVerifier.validateStringPassword(input)) {
 			throw new IOFunctionException(IOErrorCode.E1020);
 		}
 		
@@ -108,7 +79,7 @@ public class InputHandler {
 		}
 		
 		// check name format
-		if(!validateStringName(input)) {
+		if(!FormatVerifier.validateStringName(input)) {
 			throw new IOFunctionException(IOErrorCode.E1030);
 		}
 		
@@ -125,7 +96,7 @@ public class InputHandler {
 		}
 		
 		// check name format
-		if(!validateStringName(input)) {
+		if(!FormatVerifier.validateStringName(input)) {
 			throw new IOFunctionException(IOErrorCode.E1060);
 		}
 		
@@ -142,7 +113,7 @@ public class InputHandler {
 		}
 		
 		// check withdraw amount format
-		if(!validateBigDecimal(input)) {
+		if(!FormatVerifier.validateBigDecimal(input)) {
 			throw new IOFunctionException(IOErrorCode.E1040);
 		}
 		
@@ -210,7 +181,7 @@ public class InputHandler {
 		}
 		
 		// Load ID should only contain digits
-		if(!containsOnlyDigits(input)) {
+		if(!FormatVerifier.containsOnlyDigits(input)) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
 		
