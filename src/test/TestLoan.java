@@ -1,17 +1,5 @@
 package test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-
-import org.junit.Test;
-
-import main.account.Loan;
-import main.bank.Bank;
-import main.db.AccountList;
-import main.db.LoanList;
-
 public class TestLoan {
 //	@Test
 //	public void testLoan_0() {

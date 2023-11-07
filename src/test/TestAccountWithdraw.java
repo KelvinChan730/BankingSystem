@@ -1,13 +1,6 @@
 package test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-
-import main.bank.Bank;
-
-class TestAccountWithdraw {
+public class TestAccountWithdraw {
 //	@Test
 //	public void testAccountWithdraw_1() {
 //		Bank bank = new Bank();

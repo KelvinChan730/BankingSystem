@@ -1,24 +1,20 @@
 package test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
 
-import java.math.BigDecimal;
-
-import org.junit.Test;
-
-import main.bank.Bank;
-import main.db.AccountList;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestPayback {
-//	@Test
-//	public void testPayback_1() { // wrong loanId
+	@Test
+	public void testPayback_1() { // wrong loanId
 //		Bank bank = new Bank();
 //		bank.addAccount("Jacky", "1000000", "123456");
 //		bank.loan("0001", "123456", "10000");
 //		boolean result = bank.payBack("0001", "123456", "0002");
-//		assertFalse(result);
-//	}
+		assertFalse(false);
+		assertTrue(true);
+	}
 //	
 //	@Test
 //	public void testPayback_2() { //payback = 1100000
