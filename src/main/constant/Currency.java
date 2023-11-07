@@ -15,18 +15,18 @@ public enum Currency {
 	TWD("TWD", new BigDecimal(0.2570));
 	
 	public final String name;
-    public final BigDecimal exchangeRate; // value of foreign currency in HKD
-    
-    Currency(String name, BigDecimal rate) {
+	public final BigDecimal exchangeRate; // value of foreign currency in HKD
+
+	Currency(String name, BigDecimal rate) {
 		this.name = name;
 		this.exchangeRate = rate;
 	}
-    
-    public String getName() {
-    	return name;
-    }
 
-    public BigDecimal getExchangeRate() {
-    	return exchangeRate;
-    }
+	public String getName() {
+		return name;
+	}
+
+	public BigDecimal getExchangeRate() {
+		return exchangeRate;
+	}
 }

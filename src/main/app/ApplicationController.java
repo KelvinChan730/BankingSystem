@@ -12,49 +12,48 @@ import main.db.AccountList;
 import main.exception.IOFunctionException;
 import main.utility.Authentication;
 
-
 /**
- *  Write a one-sentence summary of your robot task class here.
- *  Follow it with additional details about its purpose, how many
- *  robots it creates, and how to use it.
+ * Write a one-sentence summary of your robot task class here. Follow it with
+ * additional details about its purpose, how many robots it creates, and how to
+ * use it.
  */
 public class ApplicationController {
 	private ApplicationView view;
 	private InputHandler inputHandler;
-	
+
 	public ApplicationController() {
 		this.view = new ApplicationView();
 		this.inputHandler = new InputHandler(view);
 	}
-	
+
 	public Authentication login() {
 		String accNo, password;
-		
+
 		// prompt account number and password
 		try {
 			accNo = inputHandler.promptAccNo();
 			password = inputHandler.promptPassword();
-		} catch(IOFunctionException ioex) {
+		} catch (IOFunctionException ioex) {
 			view.display("IOFunctionException thrown  :" + ioex.getMessage());
 			return null;
 		}
 
-		//check do the account exist 
-		if(!AccountList.hasAccount(accNo)) {
+		// check do the account exist
+		if (!AccountList.hasAccount(accNo)) {
 			view.display("Account or Password Not Found");
 			return null;
 		}
 
 		// check do the password equal
 		Account existAccount = AccountList.findAccount(accNo);
-		if(!password.equals(existAccount.getPassword())) {
+		if (!password.equals(existAccount.getPassword())) {
 			view.display("Account or Password Not Found");
 			return null;
 		}
-		
+
 		return new Authentication(accNo);
 	}
-	
+
 	public int showMenu() {
 		int input = 0;
 		try {
@@ -62,13 +61,13 @@ public class ApplicationController {
 		} catch (IOFunctionException ioex) {
 			view.display("IOFunctionException thrown  :" + ioex.getMessage());
 		}
-		
+
 		return input;
 	}
-	
+
 	public BigDecimal withdraw(BaseAccount acc) {
 		String rawAmount;
-		
+
 		try {
 			// prompt user and get input with verified format
 			rawAmount = inputHandler.promptAmount("withdraw");
@@ -79,10 +78,10 @@ public class ApplicationController {
 
 		return null;
 	}
-	
+
 	public BigDecimal deposit(BaseAccount acc) {
 		String rawAmount;
-		
+
 		try {
 			// prompt user and get input with verified format
 			rawAmount = inputHandler.promptAmount("deposit");
@@ -93,7 +92,7 @@ public class ApplicationController {
 
 		return null;
 	}
-	
+
 	public TransferOperation transfer(BaseAccount acc) {
 		try {
 			// prompt user and get input with verified format
@@ -106,10 +105,10 @@ public class ApplicationController {
 
 		return null;
 	}
-	
+
 	public AccountInfo createAccount() {
 		String owner, password, phoneNo;
-		
+
 		try {
 			// prompt user and get input with verified format
 			owner = inputHandler.promptName();
@@ -123,7 +122,7 @@ public class ApplicationController {
 		return null;
 	}
 
-	public BigDecimal loan(){
+	public BigDecimal loan() {
 		try {
 			String loanAmount = inputHandler.promptAmount("loan");
 			return new BigDecimal(loanAmount);
@@ -133,7 +132,7 @@ public class ApplicationController {
 		return null;
 	}
 
-	public String payBack(){
+	public String payBack() {
 		try {
 			return inputHandler.promptLoanID();
 		} catch (IOFunctionException ioex) {
@@ -142,7 +141,7 @@ public class ApplicationController {
 		return null;
 	}
 
-	public Currency foreignCurrencyExchange(BaseAccount acc){
+	public Currency foreignCurrencyExchange(BaseAccount acc) {
 		if (acc.getType() != AccountType.FOREIGN_CURRENCY) {
 			view.display("Only Foreign Currency Account can change the currency type");
 			return null;

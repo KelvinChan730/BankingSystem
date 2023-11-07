@@ -9,9 +9,10 @@ import main.account.Loan;
 public class LoanList extends SequencedRecordCreator {
 	private static LoanList instance = null;
 	private HashMap<String, Loan> loadRecordList = new HashMap<>();
-	
-	private LoanList() {}
-	
+
+	private LoanList() {
+	}
+
 	public static LoanList getInstance() {
 		if (instance == null)
 			instance = new LoanList();
@@ -34,7 +35,7 @@ public class LoanList extends SequencedRecordCreator {
 	public boolean hasLoan(String accNo) {
 		return loadRecordList.containsKey(accNo);
 	}
-	
+
 	// find account by account number
 	public Loan findLoadRecord(String loanId) {
 		if (loadRecordList.containsKey(loanId))
@@ -47,7 +48,7 @@ public class LoanList extends SequencedRecordCreator {
 		if (AccountList.hasAccount(accNo)) {
 			Account user = AccountList.findAccount(accNo);
 			ArrayList<Loan> userLoanList = new ArrayList<>();
-			for (String loanId: user.getLoanRecordId())
+			for (String loanId : user.getLoanRecordId())
 				userLoanList.add(findLoadRecord(loanId));
 			return userLoanList;
 		}

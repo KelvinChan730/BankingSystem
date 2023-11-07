@@ -17,109 +17,109 @@ public class InputHandler {
 	public InputHandler(ApplicationView view) {
 		this.view = view;
 	}
-	
+
 	public String promptAccNo() throws IOFunctionException {
 		view.display("Please enter your account number: ");
 
 		try {
 			input = scanner.nextLine();
-		} catch(InputMismatchException ex) {
+		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
-		
+
 		// check account number format
-		if(!FormatVerifier.containsOnlyDigits(input)) {
+		if (!FormatVerifier.containsOnlyDigits(input)) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
-		
+
 		return input;
 	}
-	
+
 	public String promptTransferAccNo() throws IOFunctionException {
 		view.display("Please enter the account number you wish to transfer to: ");
 
 		try {
 			input = scanner.nextLine();
-		} catch(InputMismatchException ex) {
+		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
-		
+
 		// check account number format
-		if(!FormatVerifier.containsOnlyDigits(input)) {
+		if (!FormatVerifier.containsOnlyDigits(input)) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
-		
+
 		return input;
 	}
-	
+
 	public String promptPassword() throws IOFunctionException {
 		view.display("Please enter your password: ");
 
 		try {
 			input = scanner.nextLine();
-		} catch(InputMismatchException ex) {
+		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1020);
 		}
-		
+
 		// check password format
-		if(!FormatVerifier.validateStringPassword(input)) {
+		if (!FormatVerifier.validateStringPassword(input)) {
 			throw new IOFunctionException(IOErrorCode.E1020);
 		}
-		
+
 		return input;
 	}
-	
+
 	public String promptName() throws IOFunctionException {
 		view.display("Please enter your name: ");
 
 		try {
 			input = scanner.nextLine();
-		} catch(InputMismatchException ex) {
+		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1030);
 		}
-		
+
 		// check name format
-		if(!FormatVerifier.validateStringName(input)) {
+		if (!FormatVerifier.validateStringName(input)) {
 			throw new IOFunctionException(IOErrorCode.E1030);
 		}
-		
+
 		return input;
 	}
-	
+
 	public String promptPhoneNo() throws IOFunctionException {
 		view.display("Please enter your phone number: ");
 
 		try {
 			input = scanner.nextLine();
-		} catch(InputMismatchException ex) {
+		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1060);
 		}
-		
+
 		// check name format
-		if(!FormatVerifier.validateStringName(input)) {
+		if (!FormatVerifier.validateStringName(input)) {
 			throw new IOFunctionException(IOErrorCode.E1060);
 		}
-		
+
 		return input;
 	}
-	
+
 	public String promptAmount(String verb) throws IOFunctionException {
 		view.display(String.format("Please enter amount you wish to %s: ", verb));
 
 		try {
 			input = scanner.nextLine();
-		} catch(InputMismatchException ex) {
+		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1040);
 		}
-		
+
 		// check withdraw amount format
-		if(!FormatVerifier.validateBigDecimal(input)) {
+		if (!FormatVerifier.validateBigDecimal(input)) {
 			throw new IOFunctionException(IOErrorCode.E1040);
 		}
-		
+
 		return input;
 	}
-	
+
 	public int promptAccountOption() throws IOFunctionException {
 		view.display( "\nSelect an account type to create\n"
 					+ "1. normal account\n"
@@ -136,13 +136,13 @@ public class InputHandler {
 		}
 
 		// check withdraw amount format
-		if(intInput < 1 || intInput > 4) {
+		if (intInput < 1 || intInput > 4) {
 			throw new IOFunctionException(IOErrorCode.E1200);
 		}
-		
+
 		return intInput;
 	}
-	
+
 	public int promptMenuOption() throws IOFunctionException {
 		view.display( "\nSelect an option\n"
 					+ "Menu:\n"
@@ -164,33 +164,33 @@ public class InputHandler {
 		}
 
 		// check withdraw amount format
-		if(intInput < 1 || intInput > 8) {
+		if (intInput < 1 || intInput > 8) {
 			throw new IOFunctionException(IOErrorCode.E1210);
 		}
-		
+
 		return intInput;
 	}
 
-		public String promptLoanID() throws IOFunctionException {
-			view.display("Please enter your Loan ID: ");
+	public String promptLoanID() throws IOFunctionException {
+		view.display("Please enter your Loan ID: ");
 
 		try {
 			input = scanner.nextLine();
-		} catch(InputMismatchException ex) {
+		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
-		
+
 		// Load ID should only contain digits
-		if(!FormatVerifier.containsOnlyDigits(input)) {
+		if (!FormatVerifier.containsOnlyDigits(input)) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
-		
+
 		return input;
 	}
 
-	public Currency promptCurrencyType() throws IOFunctionException{
+	public Currency promptCurrencyType() throws IOFunctionException {
 		view.display("\nSelect an Foreign Currency Type\n");
-		for (int i = 1; i <= Currency.values().length; i++){
+		for (int i = 1; i <= Currency.values().length; i++) {
 			view.display(i + ". " + Currency.values()[i - 1]);
 		}
 

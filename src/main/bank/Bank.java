@@ -19,7 +19,6 @@ public class Bank {
 	private AccountFactory accFactory = AccountFactory.getInstance();
 	private LoanList loadList = LoanList.getInstance();
 
-
 	public void showAccountInfo(BaseAccount acc) {
 		System.out.println(acc.toString());
 	}
@@ -35,19 +34,19 @@ public class Bank {
 		AccountList.deleteAccount(accNo, password);
 		return !AccountList.hasAccount(accNo);
 	}
-	
+
 	public boolean withdraw(BaseAccount account, BigDecimal amount) {
 		// check if account has enough balance
 		BigDecimal accountBalance = account.getBalance();
 		int compare = amount.compareTo(accountBalance);
-		if(compare > 0) {
+		if (compare > 0) {
 			return false;
 		}
 		BigDecimal afterWithdraw = accountBalance.subtract(amount);
 		account.setBalance(afterWithdraw);
 		return true;
 	}
-	
+
 	public boolean deposit(BaseAccount account, BigDecimal amount) {
 		BigDecimal accountBalance = account.getBalance();
 
@@ -55,7 +54,7 @@ public class Bank {
 		account.setBalance(afterDeposit);
 		return true;
 	}
-	
+
 	// transfer amount of account currency to target account
 	public boolean transfer(BaseAccount transferAcc, TransferOperation transferOp) {
 		// check if transfer account exists
@@ -63,20 +62,20 @@ public class Bank {
 			return false;
 		}
 		Account targetAcc = AccountList.findAccount(transferOp.targetAccNo);
-		
+
 		BigDecimal transferAccBalance = transferAcc.getBalance();
 		if (transferAccBalance.compareTo(transferOp.amount) < 0 || transferOp.amount.compareTo(BigDecimal.ZERO) <= 0)
 			return false;
-		
+
 		BigDecimal reducedBalance = transferAccBalance.subtract(transferOp.amount);
 
 		// check if saving account eligible for transfer
 		if (transferAcc.getType() == AccountType.SAVING && transferAcc instanceof SavingAccount) {
-			if (((SavingAccount)transferAcc).getTargetAmount().compareTo(reducedBalance) > 0) {
+			if (((SavingAccount) transferAcc).getTargetAmount().compareTo(reducedBalance) > 0) {
 				return false;
 			}
 		}
-		
+
 		transferAcc.setBalance(transferAccBalance.subtract(transferOp.amount));
 		BigDecimal amountHKD = transferOp.amount.multiply(transferAcc.getCurrencyType().getExchangeRate());
 		BigDecimal amountTargetCurrency = amountHKD.divide(targetAcc.getCurrencyType().getExchangeRate());
@@ -157,25 +156,25 @@ public class Bank {
 		}
 		payBackAmount = payBackAmount.add(interest);
 
-		//check do user has enough balance
+		// check do user has enough balance
 		int enoughBalance = userBalance.compareTo(payBackAmount);
-		
-		//check is payback is successful
+
+		// check is payback is successful
 		boolean result;
-		if (enoughBalance>=0) {
+		if (enoughBalance >= 0) {
 			BigDecimal currentBalance = userBalance.subtract(payBackAmount);
 			acc.setBalance(currentBalance);
 			record.payBackSuccessful();
 			result = true;
-			
-		}else {
+
+		} else {
 			result = false;
 		}
-			return result;
+		return result;
 	}
 
-	public boolean currencyTypeExchange(ForeignCurrencyAccount account, Currency targetCurrencyType){
-		if (account.getCurrencyType()==targetCurrencyType){
+	public boolean currencyTypeExchange(ForeignCurrencyAccount account, Currency targetCurrencyType) {
+		if (account.getCurrencyType() == targetCurrencyType) {
 			return false;
 		}
 		account.setBalance(account.getBalance().multiply(targetCurrencyType.getExchangeRate()));

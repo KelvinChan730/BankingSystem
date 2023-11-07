@@ -14,10 +14,10 @@ import java.math.BigDecimal;
 public class ApplicationModel {
 	private Bank bank = new Bank();
 	private ApplicationController controller = new ApplicationController();
-	
+
 	public ApplicationModel() {
 	}
-	
+
 	// function to simulate loading existing records
 	public void loadRecords() {
 		AccountInfo para1 = new AccountInfo("John", "135791", "12345678");
@@ -25,28 +25,28 @@ public class ApplicationModel {
 		AccountInfo para2 = new AccountInfo("Jane", "123456", "98765432");
 		bank.addAccount(para2);
 	}
-	
+
 	// setup application
 	public ApplicationModel setup() {
 		loadRecords();
 		return this;
 	}
-	
+
 	public void run() {
 		Authentication auth = null;
 		do {
 			auth = controller.login();
 		} while (auth == null);
-		
+
 		String userAccNo = auth.getAccNo();
 		if (!AccountList.hasAccount(userAccNo))
 			return; // System error - End program
 		BaseAccount userAcc = AccountList.findAccount(userAccNo);
-		
+
 		boolean isContinue = true;
 		while (isContinue) {
 			int input = controller.showMenu();
-			switch(input) {
+			switch (input) {
 			case 1:
 				bank.showAccountInfo(userAcc);
 				break;
@@ -81,10 +81,10 @@ public class ApplicationModel {
 				isContinue = false;
 				break;
 			}
-        }
+		}
 		System.out.println("logout successfully!");
 	}
-	
+
 	public static void main(String[] args) {
 		ApplicationModel application = new ApplicationModel();
 		application.setup().run();
