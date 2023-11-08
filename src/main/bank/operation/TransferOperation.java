@@ -1,7 +1,5 @@
 package main.bank.operation;
 
-import main.utility.Authentication;
-
 import java.math.BigDecimal;
 
 public class TransferOperation extends TransactionOperation {

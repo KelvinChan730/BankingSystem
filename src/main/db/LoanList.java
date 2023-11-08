@@ -3,7 +3,7 @@ package main.db;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import main.account.Account;
+import main.account.BaseAccount;
 import main.account.Loan;
 
 public class LoanList extends SequencedRecordCreator {
@@ -27,7 +27,7 @@ public class LoanList extends SequencedRecordCreator {
 	public void addLoanRecord(Loan loan) {
 		String loanId = getSequence();
 		loadRecordList.put(loanId, loan);
-		Account user = AccountList.findAccount(loan.getAccountId());
+		BaseAccount user = AccountList.findAccount(loan.getAccountId());
 		user.addLoanRecordId(loanId);
 	}
 
@@ -46,7 +46,7 @@ public class LoanList extends SequencedRecordCreator {
 	// find account by account number
 	public ArrayList<Loan> findUserAllLoanRecord(String accNo) {
 		if (AccountList.hasAccount(accNo)) {
-			Account user = AccountList.findAccount(accNo);
+			BaseAccount user = AccountList.findAccount(accNo);
 			ArrayList<Loan> userLoanList = new ArrayList<>();
 			for (String loanId : user.getLoanRecordId())
 				userLoanList.add(findLoadRecord(loanId));

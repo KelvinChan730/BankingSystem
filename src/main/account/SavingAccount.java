@@ -30,6 +30,11 @@ public class SavingAccount extends BaseAccount implements IAccount {
 		this.targetAmount = targetAmount;
 	}
 
+	@Override
+	public String getPassword() {
+		return accountInfo.password;
+	}
+
 	// basic information of the saving account.
 	@Override
 	public String toString() {

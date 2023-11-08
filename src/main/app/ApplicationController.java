@@ -3,7 +3,6 @@ package main.app;
 import java.math.BigDecimal;
 
 import main.account.BaseAccount;
-import main.account.Account;
 import main.account.factory.AccountInfo;
 import main.bank.operation.TransferOperation;
 import main.constant.AccountType;
@@ -45,7 +44,7 @@ public class ApplicationController {
 		}
 
 		// check do the password equal
-		Account existAccount = AccountList.findAccount(accNo);
+		BaseAccount existAccount = AccountList.findAccount(accNo);
 		if (!password.equals(existAccount.getPassword())) {
 			view.display("Account or Password Not Found");
 			return null;

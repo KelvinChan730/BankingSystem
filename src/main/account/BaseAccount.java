@@ -40,4 +40,6 @@ public abstract class BaseAccount {
 	public ArrayList<String> getLoanRecordId() {
 		return loanRecordId;
 	}
+
+	public abstract String getPassword();
 }

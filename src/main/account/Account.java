@@ -24,6 +24,7 @@ public class Account extends BaseAccount implements IAccount {
 		this.accountInfo.owner = owner;
 	}
 
+	@Override
 	public String getPassword() {
 		return accountInfo.password;
 	}

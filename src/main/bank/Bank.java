@@ -5,8 +5,13 @@ import main.account.Account;
 import main.account.ForeignCurrencyAccount;
 import main.account.Loan;
 import main.account.SavingAccount;
+import main.account.factory.AbstractAccountFactory;
 import main.account.factory.AccountFactory;
 import main.account.factory.AccountInfo;
+import main.account.factory.ForeignCurrencyAccountFactory;
+import main.account.factory.ForeignCurrencyAccountInfo;
+import main.account.factory.SavingAccountFactory;
+import main.account.factory.SavingAccountInfo;
 import main.bank.operation.TransferOperation;
 import main.constant.AccountType;
 import main.constant.Currency;
@@ -16,16 +21,30 @@ import main.db.LoanList;
 import java.math.BigDecimal;
 
 public class Bank {
-	private AccountFactory accFactory = AccountFactory.getInstance();
 	private LoanList loadList = LoanList.getInstance();
 
 	public void showAccountInfo(BaseAccount acc) {
 		System.out.println(acc.toString());
 	}
 
-	// create bank account
+	// create account
 	public boolean addAccount(AccountInfo para) {
-		AccountList.addAccount(accFactory.createAccount(para));
+		AbstractAccountFactory<Account, AccountInfo> factory = AccountFactory.getInstance();
+		AccountList.addAccount(factory.createAccount(para));
+		return true;
+	}
+	
+	// create saving account
+	public boolean addAccount(SavingAccountInfo para) {
+		AbstractAccountFactory<SavingAccount, SavingAccountInfo> factory = SavingAccountFactory.getInstance();
+		AccountList.addAccount(factory.createAccount(para));
+		return true;
+	}
+	
+	// create foreign currency account
+	public boolean addAccount(ForeignCurrencyAccountInfo para) {
+		AbstractAccountFactory<ForeignCurrencyAccount, ForeignCurrencyAccountInfo> factory = ForeignCurrencyAccountFactory.getInstance();
+		AccountList.addAccount(factory.createAccount(para));
 		return true;
 	}
 
@@ -61,7 +80,7 @@ public class Bank {
 		if (!AccountList.hasAccount(transferOp.targetAccNo)) {
 			return false;
 		}
-		Account targetAcc = AccountList.findAccount(transferOp.targetAccNo);
+		BaseAccount targetAcc = AccountList.findAccount(transferOp.targetAccNo);
 
 		BigDecimal transferAccBalance = transferAcc.getBalance();
 		if (transferAccBalance.compareTo(transferOp.amount) < 0 || transferOp.amount.compareTo(BigDecimal.ZERO) <= 0)

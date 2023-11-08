@@ -2,17 +2,17 @@ package main.db;
 
 import java.util.HashMap;
 
-import main.account.Account;
+import main.account.BaseAccount;
 
 public class AccountList {
-	private static HashMap<String, Account> accountList = new HashMap<>();
+	private static HashMap<String, BaseAccount> accountList = new HashMap<>();
 
-	public static HashMap<String, Account> getList() {
+	public static HashMap<String, BaseAccount> getList() {
 		return accountList;
 	}
 
 	// add account
-	public static void addAccount(Account account) {
+	public static void addAccount(BaseAccount account) {
 		accountList.put(account.getAccNo(), account);
 	}
 
@@ -22,7 +22,7 @@ public class AccountList {
 	}
 
 	// find account by account number
-	public static Account findAccount(String accNo) {
+	public static BaseAccount findAccount(String accNo) {
 		if (accountList.containsKey(accNo))
 			return accountList.get(accNo);
 		return null;

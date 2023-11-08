@@ -25,10 +25,14 @@ public class ForeignCurrencyAccount extends BaseAccount implements IAccount {
 		this.currencyType = currencyType;
 	}
 
+	@Override
+	public String getPassword() {
+		return accountInfo.password;
+	}
+
 	// basic information of the foreign currency account.
 	@Override
 	public String toString() {
 		return super.toString() + String.format(" | Currency Type: %s\n", currencyType.getName());
 	}
-
 }
