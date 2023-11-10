@@ -7,7 +7,6 @@ import main.utility.Formatter;
 import java.math.BigDecimal;
 
 public class Account extends BaseAccount implements IAccount {
-	private final AccountType accountType = AccountType.NORMAL; // account type normal
 	private AccountInfo accountInfo; // account info
 
 	public Account(String accNo, AccountInfo accInfo) {
@@ -16,10 +15,17 @@ public class Account extends BaseAccount implements IAccount {
 		this.accountInfo = accInfo;
 	}
 
+	@Override
+	public AccountType getType() {
+		return AccountType.NORMAL;
+	}
+
+	@Override
 	public String getOwner() {
 		return accountInfo.owner;
 	}
 
+	@Override
 	public void setOwner(String owner) {
 		this.accountInfo.owner = owner;
 	}
@@ -29,15 +35,25 @@ public class Account extends BaseAccount implements IAccount {
 		return accountInfo.password;
 	}
 
+	@Override
 	public void setPassword(String password) {
 		this.accountInfo.password = password;
+	}
+
+	@Override
+	public String getPhoneNo() {
+		return accountInfo.phoneNo;
+	}
+
+	@Override
+	public void setPhoneNo(String phoneNo) {
+		this.accountInfo.phoneNo = phoneNo;
 	}
 
 	// basic information of the account.
 	@Override
 	public String toString() {
-		return String.format("Account type: %s | Account number: %s | Account holder: %s | Balance: %s",
-				accountType.name(), accNo, accountInfo.owner, Formatter.formatBalance(balance));
+		return super.toString();
 	}
 
 }

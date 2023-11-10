@@ -2,13 +2,14 @@ package main.db;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import main.account.BaseAccount;
 import main.account.Loan;
 
 public class LoanList extends SequencedRecordCreator {
 	private static LoanList instance = null;
-	private HashMap<String, Loan> loadRecordList = new HashMap<>();
+	private Map<String, Loan> loadRecordList = new HashMap<>();
 
 	private LoanList() {
 	}
@@ -19,7 +20,7 @@ public class LoanList extends SequencedRecordCreator {
 		return instance;
 	}
 
-	public HashMap<String, Loan> getList() {
+	public Map<String, Loan> getList() {
 		return loadRecordList;
 	}
 

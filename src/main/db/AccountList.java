@@ -1,13 +1,14 @@
 package main.db;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import main.account.BaseAccount;
 
 public class AccountList {
-	private static HashMap<String, BaseAccount> accountList = new HashMap<>();
+	private static Map<String, BaseAccount> accountList = new HashMap<>();
 
-	public static HashMap<String, BaseAccount> getList() {
+	public static Map<String, BaseAccount> getList() {
 		return accountList;
 	}
 

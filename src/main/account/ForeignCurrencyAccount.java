@@ -7,8 +7,6 @@ import main.constant.AccountType;
 import main.constant.Currency;
 
 public class ForeignCurrencyAccount extends BaseAccount implements IAccount {
-	protected final AccountType accountType = AccountType.FOREIGN_CURRENCY; // account type = foreign currency
-	private Currency currencyType; // currency type
 	private ForeignCurrencyAccountInfo accountInfo;
 
 	public ForeignCurrencyAccount(String accNo, ForeignCurrencyAccountInfo accInfo) {
@@ -17,12 +15,24 @@ public class ForeignCurrencyAccount extends BaseAccount implements IAccount {
 		this.accountInfo = accInfo;
 	}
 
-	public Currency getCurrencyType() {
-		return currencyType;
+	@Override
+	public AccountType getType() {
+		return AccountType.FOREIGN_CURRENCY;
 	}
 
-	public void setCurrencyType(Currency currencyType) {
-		this.currencyType = currencyType;
+	@Override
+	public Currency getCurrencyType() {
+		return accountInfo.currencyType;
+	}
+
+	@Override
+	public String getOwner() {
+		return accountInfo.owner;
+	}
+
+	@Override
+	public void setOwner(String owner) {
+		this.accountInfo.owner = owner;
 	}
 
 	@Override
@@ -30,9 +40,24 @@ public class ForeignCurrencyAccount extends BaseAccount implements IAccount {
 		return accountInfo.password;
 	}
 
+	@Override
+	public void setPassword(String password) {
+		this.accountInfo.password = password;
+	}
+
+	@Override
+	public String getPhoneNo() {
+		return accountInfo.phoneNo;
+	}
+
+	@Override
+	public void setPhoneNo(String phoneNo) {
+		this.accountInfo.phoneNo = phoneNo;
+	}
+
 	// basic information of the foreign currency account.
 	@Override
 	public String toString() {
-		return super.toString() + String.format(" | Currency Type: %s\n", currencyType.getName());
+		return super.toString() + String.format(" | Currency Type: %s\n", getCurrencyType());
 	}
 }

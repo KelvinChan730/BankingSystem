@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 // SavingAccount inherits from Account.
 // It is a special type of account
 public class SavingAccount extends BaseAccount implements IAccount {
-	protected final AccountType type = AccountType.SAVING; // account type = saving
 	private BigDecimal targetAmount = new BigDecimal(100000); // target amount
 	private SavingAccountInfo accountInfo;
 
@@ -22,6 +21,41 @@ public class SavingAccount extends BaseAccount implements IAccount {
 		this.targetAmount = accInfo.targetAmount;
 	}
 
+	@Override
+	public AccountType getType() {
+		return AccountType.SAVING;
+	}
+
+	@Override
+	public String getOwner() {
+		return accountInfo.owner;
+	}
+
+	@Override
+	public void setOwner(String owner) {
+		this.accountInfo.owner = owner;
+	}
+
+	@Override
+	public String getPassword() {
+		return accountInfo.password;
+	}
+
+	@Override
+	public void setPassword(String password) {
+		this.accountInfo.password = password;
+	}
+
+	@Override
+	public String getPhoneNo() {
+		return accountInfo.phoneNo;
+	}
+
+	@Override
+	public void setPhoneNo(String phoneNo) {
+		this.accountInfo.phoneNo = phoneNo;
+	}
+
 	public BigDecimal getTargetAmount() {
 		return targetAmount;
 	}
@@ -30,14 +64,9 @@ public class SavingAccount extends BaseAccount implements IAccount {
 		this.targetAmount = targetAmount;
 	}
 
-	@Override
-	public String getPassword() {
-		return accountInfo.password;
-	}
-
 	// basic information of the saving account.
 	@Override
 	public String toString() {
-		return super.toString() + String.format(" | Target Amount: %s\n", Formatter.formatBalance(targetAmount));
+		return super.toString() + String.format(" | Target Amount: %s\n", Formatter.formatBalance(getTargetAmount()));
 	}
 }

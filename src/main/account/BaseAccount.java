@@ -2,17 +2,23 @@ package main.account;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import main.constant.AccountType;
 import main.constant.Currency;
+import main.utility.Formatter;
 
 public abstract class BaseAccount {
-	protected final AccountType accountType = null; // account type
-	protected final Currency currencytype = Currency.HKD; // currency type HKD
 	protected String accNo; // account number
 	protected BigDecimal balance; // balance
-	protected ArrayList<String> loanRecordId = new ArrayList<String>();
+	protected List<String> loanRecordId = new ArrayList<>();
 
+	abstract public AccountType getType();
+
+	public Currency getCurrencyType() {
+		return Currency.HKD;
+	}
+	
 	public String getAccNo() {
 		return accNo;
 	}
@@ -25,21 +31,29 @@ public abstract class BaseAccount {
 		this.balance = balance;
 	}
 
-	public AccountType getType() {
-		return accountType;
-	}
-
-	public Currency getCurrencyType() {
-		return currencytype;
-	}
-
 	public void addLoanRecordId(String loanId) {
 		loanRecordId.add(loanId);
 	}
 
-	public ArrayList<String> getLoanRecordId() {
+	public List<String> getLoanRecordId() {
 		return loanRecordId;
 	}
 
-	public abstract String getPassword();
+	abstract public String getOwner();
+
+	abstract public void setOwner(String owner);
+
+	abstract public String getPassword();
+
+	abstract public void setPassword(String password);
+
+	abstract public String getPhoneNo();
+
+	abstract public void setPhoneNo(String phoneNo);
+	
+	@Override
+	public String toString() {
+		return String.format("Account type: %s | Account number: %s | Account holder: %s | Balance: %s",
+				getType().name(), getAccNo(), getOwner(), Formatter.formatBalance(getBalance()));
+	}
 }
