@@ -1,5 +1,3 @@
-package test;
-
 public class TestLoan {
 //	@Test
 //	public void testLoan_0() {

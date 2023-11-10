@@ -1,5 +1,3 @@
-package test;
-
 import main.utility.FormatVerifier;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +12,7 @@ class FormatVerifierTest {
 		assertTrue(FormatVerifier.validateStringName("1"), "Should return true with 1 character");
 		assertFalse(FormatVerifier.containsOnlyDigits("-100"), "Should return false with negative sign");
 		assertFalse(FormatVerifier.containsOnlyDigits("abcdefghijklmnopqrstuvwxyz"),
-				"Should return false with only lowercase alphabets");
+				"Should return false with lowercase alphabets");
 		assertFalse(FormatVerifier.containsOnlyDigits("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
 				"Should return false with uppercase alphabets");
 		assertFalse(FormatVerifier.containsOnlyDigits("+-*/()"), "Should return false with symbols");
@@ -56,7 +54,7 @@ class FormatVerifierTest {
 		assertTrue(FormatVerifier.validateBigDecimalFormat("-100.123"),
 				"Should return true with negative floating point value");
 		assertFalse(FormatVerifier.validateBigDecimalFormat("abcdefghijklmnopqrstuvwxyz"),
-				"Should return false with only lowercase alphabets");
+				"Should return false with lowercase alphabets");
 		assertFalse(FormatVerifier.validateBigDecimalFormat("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
 				"Should return false with uppercase alphabets");
 		assertFalse(FormatVerifier.validateBigDecimalFormat("+-*/()"), "Should return false with symbols");
@@ -73,7 +71,7 @@ class FormatVerifierTest {
 		assertFalse(FormatVerifier.validateBigDecimal("-100.123"),
 				"Should return false with negative floating point value");
 		assertFalse(FormatVerifier.validateBigDecimal("abcdefghijklmnopqrstuvwxyz"),
-				"Should return false with only lowercase alphabets");
+				"Should return false with lowercase alphabets");
 		assertFalse(FormatVerifier.validateBigDecimal("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
 				"Should return false with uppercase alphabets");
 		assertFalse(FormatVerifier.validateBigDecimal("+-*/()"), "Should return false with symbols");

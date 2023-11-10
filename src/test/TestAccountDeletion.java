@@ -1,5 +1,3 @@
-package test;
-
 public class TestAccountDeletion {
 //	@Test
 //	public void testAccountDeletion_1() { // correct account deletion

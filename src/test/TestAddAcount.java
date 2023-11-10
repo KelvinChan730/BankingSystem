@@ -1,5 +1,3 @@
-package test;
-
 public class TestAddAcount {
 //	@Test
 //	public void testAddAccount_NormalCase() {
