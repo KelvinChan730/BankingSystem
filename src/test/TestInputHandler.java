@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import main.app.ApplicationView;
 import main.app.InputHandler;
+import main.constant.Currency;
 import main.exception.IOFunctionException;
 
 public class TestInputHandler {
@@ -137,7 +138,7 @@ public class TestInputHandler {
 	
 	@Test
 	//test promptAmount()
-	public void promptAmount11() {
+	public void shouldTakeUserInput11() {
 		ApplicationView applicationView = new ApplicationView();
 
 		String input = "1234";
@@ -149,7 +150,7 @@ public class TestInputHandler {
 	
 	@Test
 	//test promptAmount()
-	public void promptAmount12() {
+	public void shouldTakeUserInput12() {
 		ApplicationView applicationView = new ApplicationView();
 
 		String input = "12))34";
@@ -161,7 +162,7 @@ public class TestInputHandler {
 	
 	@Test
 	//test promptAccountOption()
-	public void promptAccountOption13() {
+	public void shouldTakeUserInput13() {
 		ApplicationView applicationView = new ApplicationView();
 
 		String input = "1";
@@ -173,7 +174,7 @@ public class TestInputHandler {
 	
 	@Test
 	//test promptAccountOption()
-	public void promptAccountOption14() {
+	public void shouldTakeUserInput14() {
 		ApplicationView applicationView = new ApplicationView();
 
 		String input = "5";
@@ -185,7 +186,7 @@ public class TestInputHandler {
 	
 	@Test
 	//test promptAccountOption()
-	public void promptAccountOption15() {
+	public void shouldTakeUserInput15() {
 		ApplicationView applicationView = new ApplicationView();
 
 		String input = "0";
@@ -197,7 +198,7 @@ public class TestInputHandler {
 	
 	@Test
 	//test promptMenuOption()
-	public void promptMenuOption16() {
+	public void shouldTakeUserInput16() {
 		ApplicationView applicationView = new ApplicationView();
 
 		String input = "1";
@@ -209,7 +210,7 @@ public class TestInputHandler {
 	
 	@Test
 	//test promptMenuOption()
-	public void promptMenuOption17() {
+	public void shouldTakeUserInput17() {
 		ApplicationView applicationView = new ApplicationView();
 
 		String input = "aacc";
@@ -221,7 +222,7 @@ public class TestInputHandler {
 	
 	@Test
 	//test promptMenuOption()
-	public void promptMenuOption18() {
+	public void shouldTakeUserInput18() {
 		ApplicationView applicationView = new ApplicationView();
 
 		String input = "9";
@@ -231,5 +232,83 @@ public class TestInputHandler {
 		assertThrows(IOFunctionException.class, () -> inputHandler.promptMenuOption());
 	}
 	
+	@Test
+	//test promptMenuOption()
+	public void shouldTakeUserInput19() {
+		ApplicationView applicationView = new ApplicationView();
+
+		String input = "0";
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		InputHandler inputHandler = new InputHandler(applicationView, new Scanner(System.in));
+		assertThrows(IOFunctionException.class, () -> inputHandler.promptMenuOption());
+	}
+	
+	@Test
+	//test promptLoanID()
+	public void shouldTakeUserInput20() {
+		ApplicationView applicationView = new ApplicationView();
+		String input = "0001";
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		InputHandler inputHandler = new InputHandler(applicationView, new Scanner(System.in));
+		assertDoesNotThrow(() -> assertEquals(input, inputHandler.promptLoanID()));
+	}
+	
+	@Test
+	//test promptLoanID()
+	public void shouldTakeUserInput21() {
+		ApplicationView applicationView = new ApplicationView();
+
+		String input = "00-1";
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		InputHandler inputHandler = new InputHandler(applicationView, new Scanner(System.in));
+		assertThrows(IOFunctionException.class, () -> inputHandler.promptLoanID());
+	}
+	
+	@Test
+	//test promptCurrencyType()()
+	public void shouldTakeUserInput22() {
+		ApplicationView applicationView = new ApplicationView();
+		String input = "2";
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		InputHandler inputHandler = new InputHandler(applicationView, new Scanner(System.in));
+		assertDoesNotThrow(() -> assertEquals(Currency.USD, inputHandler.promptCurrencyType()));
+	}
+	
+	@Test
+	//test promptCurrencyType()()
+	public void shouldTakeUserInput23() {
+		ApplicationView applicationView = new ApplicationView();
+		String input = "%%%";
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		InputHandler inputHandler = new InputHandler(applicationView, new Scanner(System.in));
+		assertThrows(IOFunctionException.class, () -> inputHandler.promptCurrencyType());
+	}
+	
+	@Test
+	//test promptCurrencyType()()
+	public void shouldTakeUserInput24() {
+		ApplicationView applicationView = new ApplicationView();
+		String input = "0";
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		InputHandler inputHandler = new InputHandler(applicationView, new Scanner(System.in));
+		assertThrows(IOFunctionException.class, () -> inputHandler.promptCurrencyType());
+	}
+	
+	@Test
+	//test promptCurrencyType()()
+	public void shouldTakeUserInput25() {
+		ApplicationView applicationView = new ApplicationView();
+		String input = "100";
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
+		InputHandler inputHandler = new InputHandler(applicationView, new Scanner(System.in));
+		assertThrows(IOFunctionException.class, () -> inputHandler.promptCurrencyType());
+	}
 	
 }
