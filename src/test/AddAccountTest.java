@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -23,37 +24,18 @@ public class AddAccountTest {
 	@Test
 	// test normal account
 	public void testAddAccount01() {
-		//BankAPI bank = new BankAPI();//
-        // get next sequence
-        String expectedSeq = AccountListSequencer.getInstance().getSequence();
-        String username = "Jacky";
-        String password = "123456";
-        String phoneNo = "12345678";
-
-		AccountInfo para = new AccountInfo(username, password, phoneNo);
-		boolean result = Bank.addAccount(para);
-		assertTrue(result);
-
-        assertTrue(AccountList.hasAccount(expectedSeq));
-
-        BaseAccount createdAcc = AccountList.findAccount(expectedSeq);
-        assertTrue(createdAcc instanceof Account);
-        assertTrue(createdAcc.getOwner() == username);
-        assertTrue(createdAcc.getPassword() == password);
-        assertTrue(createdAcc.getPhoneNo() == phoneNo);
+        // add account
+        AccountInfo accInfo = new AccountInfo("Jacky", "123456", "12345678");
+        String accNo = AccountListSequencer.getInstance().getSequence();
+        Account account = TestHelper.createTestAccount(accInfo);
 	}
 	
 	@Test
 	// test normal account
 	public void testAddAccount02() {
-		//BankAPI bank = new BankAPI();//
         // get next sequence
         String expectedSeq = AccountListSequencer.getInstance().getSequence();
-
-//		AccountInfo para = new AccountInfo(username, password, phoneNo);
-        AccountInfo para = null;
-		boolean result = Bank.addAccount(para);
-		assertFalse(result);
+		assertFalse(Bank.addAccount((AccountInfo)null));
 
         assertFalse(AccountList.hasAccount(expectedSeq)); // if cannot add account, then it will be false
 
@@ -64,7 +46,6 @@ public class AddAccountTest {
     @Test
     // test saving account
     public void testAddAccount03() {
-        //BankAPI bank = new BankAPI();//
         // get next sequence
         String expectedSeq = AccountListSequencer.getInstance().getSequence();
         String username = "Jacky";
@@ -80,22 +61,18 @@ public class AddAccountTest {
 
         BaseAccount createdAcc = AccountList.findAccount(expectedSeq);
         assertTrue(createdAcc instanceof SavingAccount);
-        assertTrue(createdAcc.getOwner() == username);
-        assertTrue(createdAcc.getPassword() == password);
-        assertTrue(createdAcc.getPhoneNo() == phoneNo);
-        assertTrue(((SavingAccount) createdAcc).getTargetAmount() == targetAmt);
+        assertEquals(createdAcc.getOwner(), username);
+        assertEquals(createdAcc.getPassword(), password);
+        assertEquals(createdAcc.getPhoneNo(), phoneNo);
+        assertEquals(((SavingAccount) createdAcc).getTargetAmount(), targetAmt);
     }
     
     @Test
     // test saving account
     public void testAddAccount04() {
-        //BankAPI bank = new BankAPI();//
         // get next sequence
         String expectedSeq = AccountListSequencer.getInstance().getSequence();
-
-        SavingAccountInfo para = null;
-        boolean result = Bank.addAccount(para);
-        assertFalse(result);
+        assertFalse(Bank.addAccount((SavingAccountInfo)null));
 
         assertFalse(AccountList.hasAccount(expectedSeq));
 
@@ -106,7 +83,6 @@ public class AddAccountTest {
     @Test
     // test foreign currency account
     public void testAddAccount05() {
-        //BankAPI bank = new BankAPI();//
         // get next sequence
         String expectedSeq = AccountListSequencer.getInstance().getSequence();
         String username = "Jacky";
@@ -122,22 +98,18 @@ public class AddAccountTest {
 
         BaseAccount createdAcc = AccountList.findAccount(expectedSeq);
         assertTrue(createdAcc instanceof ForeignCurrencyAccount);
-        assertTrue(createdAcc.getOwner() == username);
-        assertTrue(createdAcc.getPassword() == password);
-        assertTrue(createdAcc.getPhoneNo() == phoneNo);
-        assertTrue(((ForeignCurrencyAccount) createdAcc).getCurrencyType() == currency);
+        assertEquals(createdAcc.getOwner(), username);
+        assertEquals(createdAcc.getPassword(), password);
+        assertEquals(createdAcc.getPhoneNo(), phoneNo);
+        assertEquals(((ForeignCurrencyAccount) createdAcc).getCurrencyType(), currency);
     }
     
     @Test
     // test foreign currency account
     public void testAddAccount06() {
-        //BankAPI bank = new BankAPI();//
         // get next sequence
         String expectedSeq = AccountListSequencer.getInstance().getSequence();
-
-        ForeignCurrencyAccountInfo para = null;
-        boolean result = Bank.addAccount(para);
-        assertFalse(result);
+        assertFalse(Bank.addAccount((ForeignCurrencyAccountInfo) null));
 
         assertFalse(AccountList.hasAccount(expectedSeq));
 

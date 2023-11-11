@@ -1,9 +1,8 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
-
 import java.math.BigDecimal;
 
+import main.account.Account;
 import org.junit.jupiter.api.Test;
 
 import main.account.factory.AccountInfo;
@@ -13,48 +12,47 @@ import main.bank.Bank;
 import main.constant.Currency;
 import main.db.AccountListSequencer;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class TestDeleteAccount {
 
 	@Test
 	// test delete normal account
 	public void testDeleteAccount01() {
-		//BankAPI bank = new BankAPI();//
-		String expectedSeq = AccountListSequencer.getInstance().getSequence();
-		String username = "Jacky";
+		// add account
 		String password = "123456";
-		String phoneNo = "12345678";
-		AccountInfo para = new AccountInfo(username, password, phoneNo);
-		Bank.addAccount(para);
-		boolean result = Bank.deleteAccount(expectedSeq, password);
-		assertEquals(true, result);
+		AccountInfo accInfo = new AccountInfo("Jacky", password, "12345678");
+		String accNo = AccountListSequencer.getInstance().getSequence();
+		Account account = TestHelper.createTestAccount(accInfo);
+
+		boolean result = Bank.deleteAccount(accNo, "123456");
+		assertTrue(result);
 	}
 
 	@Test
 	// test delete normal account
 	public void testDeleteAccount02() {
-		//BankAPI bank = new BankAPI();//
-		String expectedSeq = AccountListSequencer.getInstance().getSequence();
-		String username = "Jacky";
-		String password = "123456";
-		String phoneNo = "12345678";
-		AccountInfo para = new AccountInfo(username, password, phoneNo);
-		Bank.addAccount(para);
-		boolean result = Bank.deleteAccount(expectedSeq, "kkkkk");
-		assertEquals(false, result);
+		// add account
+		AccountInfo accInfo = new AccountInfo("Jacky", "123456", "12345678");
+		String accNo = AccountListSequencer.getInstance().getSequence();
+		Account account = TestHelper.createTestAccount(accInfo);
+
+		boolean result = Bank.deleteAccount(accNo, "kkkkk");
+		assertFalse(result);
 	}
 
 	@Test
 	// test delete normal account
 	public void testDeleteAccount03() {
-		//BankAPI bank = new BankAPI();//
-		String expectedSeq = AccountListSequencer.getInstance().getSequence();
-		String username = "Jacky";
+		// add account
 		String password = "123456";
-		String phoneNo = "12345678";
-		AccountInfo para = new AccountInfo(username, password, phoneNo);
-		Bank.addAccount(para);
+		AccountInfo accInfo = new AccountInfo("Jacky", password, "12345678");
+		String accNo = AccountListSequencer.getInstance().getSequence();
+		Account account = TestHelper.createTestAccount(accInfo);
+
 		boolean result = Bank.deleteAccount("9999", password);
-		assertEquals(false, result);
+		assertFalse(result);
 	}
 
 	@Test
@@ -71,7 +69,7 @@ public class TestDeleteAccount {
 		SavingAccountInfo para = new SavingAccountInfo(username, password, phoneNo, targetAmt);
 		Bank.addAccount(para);
 		boolean result = Bank.deleteAccount(expectedSeq, password);
-		assertEquals(true, result);
+		assertTrue(result);
 	}
 
 	@Test
@@ -88,7 +86,7 @@ public class TestDeleteAccount {
 		SavingAccountInfo para = new SavingAccountInfo(username, password, phoneNo, targetAmt);
 		Bank.addAccount(para);
 		boolean result = Bank.deleteAccount(expectedSeq, "jjjj");
-		assertEquals(false, result);
+		assertFalse(result);
 	}
 
 	@Test
@@ -105,7 +103,7 @@ public class TestDeleteAccount {
 		SavingAccountInfo para = new SavingAccountInfo(username, password, phoneNo, targetAmt);
 		Bank.addAccount(para);
 		boolean result = Bank.deleteAccount("9999", password);
-		assertEquals(false, result);
+		assertFalse(result);
 	}
 
 	@Test
@@ -122,7 +120,7 @@ public class TestDeleteAccount {
 		ForeignCurrencyAccountInfo para = new ForeignCurrencyAccountInfo(username, password, phoneNo, currency);
 		Bank.addAccount(para);
 		boolean result = Bank.deleteAccount(expectedSeq, password);
-		assertEquals(true, result);
+		assertTrue(result);
 	}
 
 	@Test
@@ -139,7 +137,7 @@ public class TestDeleteAccount {
 		ForeignCurrencyAccountInfo para = new ForeignCurrencyAccountInfo(username, password, phoneNo, currency);
 		Bank.addAccount(para);
 		boolean result = Bank.deleteAccount(expectedSeq, "jjjj");
-		assertEquals(false, result);
+		assertFalse(result);
 	}
 	
 	@Test
@@ -156,6 +154,6 @@ public class TestDeleteAccount {
 		ForeignCurrencyAccountInfo para = new ForeignCurrencyAccountInfo(username, password, phoneNo, currency);
 		Bank.addAccount(para);
 		boolean result = Bank.deleteAccount("9999", password);
-		assertEquals(false, result);
+		assertFalse(result);
 	}
 }

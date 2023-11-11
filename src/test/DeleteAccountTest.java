@@ -14,32 +14,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class DeleteAccountTest {
 	@Test
 	public void testDeleteAccount_01() {
-		// add normal account
-		//BankAPI bank = new BankAPI();//
-		// get next sequence
-		String expectedSeq = AccountListSequencer.getInstance().getSequence();
-		String username = "Jacky";
-		String password = "123456";
-		String phoneNo = "12345678";
-
 		// add account
-		AccountInfo para = new AccountInfo(username, password, phoneNo);
-		boolean result = Bank.addAccount(para);
-
-		// check account added
-		assertTrue(result);
-		assertTrue(AccountList.hasAccount(expectedSeq));
-
-		// check added account content
-		BaseAccount createdAcc = AccountList.findAccount(expectedSeq);
-		assertTrue(createdAcc instanceof Account);
-		assertTrue(createdAcc.getOwner() == username);
-		assertTrue(createdAcc.getPassword() == password);
-		assertTrue(createdAcc.getPhoneNo() == phoneNo);
+		String password = "123456";
+		AccountInfo accInfo = new AccountInfo("Jacky", password, "12345678");
+		String accNo = AccountListSequencer.getInstance().getSequence();
+		TestHelper.createTestAccount(accInfo);
 
 		// delete account
-		boolean result2 = Bank.deleteAccount(expectedSeq, password);
+		boolean result2 = Bank.deleteAccount(accNo, password);
 		assertTrue(result2);
-		assertFalse(AccountList.hasAccount(expectedSeq));
+		assertFalse(AccountList.hasAccount(accNo));
 	}
 }
