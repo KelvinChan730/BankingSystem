@@ -3,7 +3,7 @@ package test;
 import main.account.Account;
 import main.account.BaseAccount;
 import main.account.factory.AccountInfo;
-import main.bank.BankAPI;
+import main.bank.Bank;
 import main.db.AccountList;
 import main.db.AccountListSequencer;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ public class DeleteAccountTest {
 	@Test
 	public void testDeleteAccount_01() {
 		// add normal account
-		BankAPI bank = new BankAPI();
+		//BankAPI bank = new BankAPI();//
 		// get next sequence
 		String expectedSeq = AccountListSequencer.getInstance().getSequence();
 		String username = "Jacky";
@@ -24,7 +24,7 @@ public class DeleteAccountTest {
 
 		// add account
 		AccountInfo para = new AccountInfo(username, password, phoneNo);
-		boolean result = bank.addAccount(para);
+		boolean result = Bank.addAccount(para);
 
 		// check account added
 		assertTrue(result);
@@ -38,7 +38,7 @@ public class DeleteAccountTest {
 		assertTrue(createdAcc.getPhoneNo() == phoneNo);
 
 		// delete account
-		boolean result2 = bank.deleteAccount(expectedSeq, password);
+		boolean result2 = Bank.deleteAccount(expectedSeq, password);
 		assertTrue(result2);
 		assertFalse(AccountList.hasAccount(expectedSeq));
 	}
