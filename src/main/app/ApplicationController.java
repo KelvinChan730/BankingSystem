@@ -5,12 +5,14 @@ import java.util.Scanner;
 
 import main.account.BaseAccount;
 import main.account.factory.AccountInfo;
+import main.account.factory.BaseAccountInfo;
+import main.account.factory.ForeignCurrencyAccountInfo;
+import main.account.factory.SavingAccountInfo;
 import main.bank.operation.TransferOperation;
 import main.constant.AccountType;
 import main.constant.Currency;
 import main.db.AccountList;
 import main.exception.IOFunctionException;
-import main.utility.Authentication;
 
 /**
  * Write a one-sentence summary of your robot task class here. Follow it with
@@ -25,8 +27,9 @@ public class ApplicationController {
 		this.view = new ApplicationView();
 		this.inputHandler = new InputHandler(view, new Scanner(System.in));
 	}
+	
 
-	public Authentication login() {
+	public BaseAccount login() {
 		String accNo, password;
 
 		// prompt account number and password
@@ -51,7 +54,15 @@ public class ApplicationController {
 			return null;
 		}
 
-		return new Authentication(accNo);
+		return AccountList.findAccount(accNo);
+	}
+
+	public BaseAccount keepLogin(){
+		BaseAccount ac;
+		do {
+			ac = login();
+		} while (ac==null);
+		return ac;
 	}
 
 	public int showMenu() {
@@ -64,6 +75,31 @@ public class ApplicationController {
 
 		return input;
 	}
+
+	
+	public int showInitialMenu() {
+		int input = 0;
+		try {
+			input = inputHandler.promptInitialOption();
+		} catch (IOFunctionException ioex) {
+			view.display("IOFunctionException thrown  :" + ioex.getMessage());
+		}
+
+		return input;
+	}
+
+	public AccountType showAccountOption() {
+		int input = 0;
+		try {
+			input = inputHandler.promptAccountOption();
+		} catch (IOFunctionException ioex) {
+			view.display("IOFunctionException thrown  :" + ioex.getMessage());
+		}
+
+		return AccountType.values()[input];
+	}
+
+
 
 	public BigDecimal withdraw(BaseAccount acc) {
 		String rawAmount;
@@ -106,19 +142,27 @@ public class ApplicationController {
 		return null;
 	}
 
-	public AccountInfo createAccount() {
+	public BaseAccountInfo createAccountInfo(AccountType type) {
 		String owner, password, phoneNo;
-
 		try {
-			// prompt user and get input with verified format
 			owner = inputHandler.promptName();
 			password = inputHandler.promptPassword();
 			phoneNo = inputHandler.promptPhoneNo();
-			return new AccountInfo(owner, password, phoneNo);
+		switch (type){
+			case FOREIGN_CURRENCY:
+				Currency cType = inputHandler.promptCurrencyType();
+				return new ForeignCurrencyAccountInfo(owner, password, phoneNo, cType);
+			case NORMAL:
+				return new AccountInfo(owner, password, phoneNo);
+			case SAVING:
+				BigDecimal targetAmount = new BigDecimal(inputHandler.promptAmount("target saving amount"));
+				return new SavingAccountInfo(owner, password, phoneNo, targetAmount);
+			default:
+				break;
+			}
 		} catch (IOFunctionException ioex) {
 			view.display("IOFunctionException thrown  :" + ioex.getMessage());
 		}
-
 		return null;
 	}
 

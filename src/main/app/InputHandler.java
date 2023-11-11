@@ -23,7 +23,7 @@ public class InputHandler {
 
 		try {
 			input = scanner.nextLine();
-		} catch (Exception ex) {
+		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
 
@@ -40,7 +40,7 @@ public class InputHandler {
 
 		try {
 			input = scanner.nextLine();
-		} catch (Exception ex) {
+		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
 
@@ -57,7 +57,7 @@ public class InputHandler {
 
 		try {
 			input = scanner.nextLine();
-		} catch (Exception ex) {
+		} catch (InputMismatchException ex) {
 			throw new IOFunctionException(IOErrorCode.E1020);
 		}
 
@@ -95,8 +95,8 @@ public class InputHandler {
 			throw new IOFunctionException(IOErrorCode.E1060);
 		}
 
-		// check Phone no format
-		if (!FormatVerifier.containsOnlyDigits(input)) {
+		// check name format
+		if (!FormatVerifier.validateStringName(input)) {
 			throw new IOFunctionException(IOErrorCode.E1060);
 		}
 
@@ -143,6 +143,29 @@ public class InputHandler {
 		return intInput;
 	}
 
+	public int promptInitialOption() throws IOFunctionException {
+		view.display( "\nSelect an option\n"
+					+ "Menu:\n"
+					+ "1. login\n"
+					+ "2. create account\n"
+					+ "3. exit\n");
+
+		int intInput = 0;
+		try {
+			input = scanner.nextLine();
+			intInput = Integer.parseInt(input);
+		} catch (InputMismatchException | NumberFormatException ex) {
+			throw new IOFunctionException(IOErrorCode.E1050);
+		}
+
+		// check withdraw amount format
+		if (intInput < 1 || intInput > 3) {
+			throw new IOFunctionException(IOErrorCode.E1210);
+		}
+
+		return intInput;
+	}
+
 	public int promptMenuOption() throws IOFunctionException {
 		view.display( "\nSelect an option\n"
 					+ "Menu:\n"
@@ -152,7 +175,7 @@ public class InputHandler {
 					+ "4. transfer\n"
 					+ "5. loan\n"
 					+ "6. payback loan\n"
-					+ "7. Change Account Currency Type\n"
+					+ "7. delete account\n"
 					+ "8. exit\n");
 
 		int intInput = 0;

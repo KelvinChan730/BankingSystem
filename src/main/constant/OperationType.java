@@ -9,5 +9,6 @@ public enum OperationType {
     LOAN,
     PAYBACK,
     ACCOUNT_CREATION,
-    ACCOUNT_DELETION;
+    ACCOUNT_DELETION,
+    SHOWACCOUNTDETAIL;
 }
