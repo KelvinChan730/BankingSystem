@@ -44,7 +44,7 @@ public class FormatVerifier {
 			try {
 				BigDecimal number = new BigDecimal(parameter);
 				return number.compareTo(BigDecimal.ZERO) >= 0;
-			} catch (NumberFormatException ex) {
+			} catch (NumberFormatException ex) { // never get into here
 				return false;
 			}
 		}

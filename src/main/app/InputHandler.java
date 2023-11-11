@@ -23,7 +23,7 @@ public class InputHandler {
 
 		try {
 			input = scanner.nextLine();
-		} catch (InputMismatchException ex) {
+		} catch (Exception ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
 
@@ -40,7 +40,7 @@ public class InputHandler {
 
 		try {
 			input = scanner.nextLine();
-		} catch (InputMismatchException ex) {
+		} catch (Exception ex) {
 			throw new IOFunctionException(IOErrorCode.E1010);
 		}
 
@@ -57,7 +57,7 @@ public class InputHandler {
 
 		try {
 			input = scanner.nextLine();
-		} catch (InputMismatchException ex) {
+		} catch (Exception ex) {
 			throw new IOFunctionException(IOErrorCode.E1020);
 		}
 
@@ -95,8 +95,8 @@ public class InputHandler {
 			throw new IOFunctionException(IOErrorCode.E1060);
 		}
 
-		// check name format
-		if (!FormatVerifier.validateStringName(input)) {
+		// check Phone no format
+		if (!FormatVerifier.containsOnlyDigits(input)) {
 			throw new IOFunctionException(IOErrorCode.E1060);
 		}
 

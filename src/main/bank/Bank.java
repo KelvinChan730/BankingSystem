@@ -165,6 +165,9 @@ public class Bank {
 		if (record == null) {
 			return false;
 		}
+		if(record.getPayBack()) {
+			return true;
+		}
 		BigDecimal payBackAmount = record.getLoanAmount();
 		// interest for the loan
 		BigDecimal interest;
