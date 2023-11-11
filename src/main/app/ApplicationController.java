@@ -1,6 +1,7 @@
 package main.app;
 
 import java.math.BigDecimal;
+import java.util.Scanner;
 
 import main.account.BaseAccount;
 import main.account.factory.AccountInfo;
@@ -22,7 +23,7 @@ public class ApplicationController {
 
 	public ApplicationController() {
 		this.view = new ApplicationView();
-		this.inputHandler = new InputHandler(view);
+		this.inputHandler = new InputHandler(view, new Scanner(System.in));
 	}
 
 	public Authentication login() {

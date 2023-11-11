@@ -16,6 +16,7 @@ public class ApplicationModel {
 	private ApplicationController controller = new ApplicationController();
 
 	public ApplicationModel() {
+
 	}
 
 	// function to simulate loading existing records

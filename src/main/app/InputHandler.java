@@ -9,12 +9,13 @@ import main.exception.IOFunctionException;
 import main.utility.FormatVerifier;
 
 public class InputHandler {
-	private Scanner scanner = new Scanner(System.in);
+	private Scanner scanner ;
 	private ApplicationView view;
 	private String input = "";
 
-	public InputHandler(ApplicationView view) {
+	public InputHandler(ApplicationView view, Scanner scanner) {
 		this.view = view;
+		this.scanner = scanner;
 	}
 
 	public String promptAccNo() throws IOFunctionException {
