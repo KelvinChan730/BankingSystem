@@ -9,5 +9,4 @@ public class TransferOperation extends TransactionOperation {
 		super(amount);
 		this.targetAccNo = targetAccNo;
 	}
-
 }

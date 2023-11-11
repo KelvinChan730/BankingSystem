@@ -21,10 +21,14 @@ import main.db.LoanList;
 import java.math.BigDecimal;
 
 public class Bank {
-	private LoanList loadList = LoanList.getInstance();
+	private final LoanList loadList = LoanList.getInstance();
 
-	public void showAccountInfo(BaseAccount acc) {
-		System.out.println(acc.toString());
+	boolean operate() {
+		return false;
+	}
+
+	public String getAccountDetail(BaseAccount acc) {
+		return acc.toString();
 	}
 
 	// create account
