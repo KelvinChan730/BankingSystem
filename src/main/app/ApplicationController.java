@@ -154,4 +154,8 @@ public class ApplicationController {
 
 		return null;
 	}
+	
+	public void display(String message) {
+		view.display(message);
+	}
 }

@@ -2,7 +2,6 @@ package main.account;
 
 import main.constant.AccountType;
 import main.account.factory.AccountInfo;
-import main.utility.Formatter;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,6 @@
 # Compiled class file
+/bin/
+/bin.test/
 *.class
 
 # Log file
@@ -39,5 +41,3 @@ out/
 
 ### VS Code ###
 .vscode/
-
-/bin/

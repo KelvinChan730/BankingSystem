@@ -46,9 +46,11 @@ public class ApplicationModel {
 		boolean isContinue = true;
 		while (isContinue) {
 			int input = controller.showMenu();
+			String message;
 			switch (input) {
 			case 1:
-				bank.showAccountInfo(userAcc);
+				message = bank.getAccountDetail(userAcc);
+				controller.display(message);
 				break;
 			case 2:
 				BigDecimal withdrawAmount = controller.withdraw(userAcc);
@@ -75,14 +77,13 @@ public class ApplicationModel {
 				bank.currencyTypeExchange((ForeignCurrencyAccount) userAcc, currency);
 				break;
 			case 8:
-				isContinue = false;
-				break;
 			default:
+				auth = null;
 				isContinue = false;
 				break;
 			}
 		}
-		System.out.println("logout successfully!");
+		controller.display("logout successfully!");
 	}
 
 	public static void main(String[] args) {
