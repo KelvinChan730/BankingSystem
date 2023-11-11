@@ -17,8 +17,11 @@ public class BankAPI {
         return acc.toString();
     }
 
-    // create account
+    // create normal account
     public boolean addAccount(AccountInfo para) {
+    	if(para == null) {
+    		return false;
+    	}
         AbstractAccountFactory<Account, AccountInfo> factory = AccountFactory.getInstance();
         AccountList.addAccount(factory.createAccount(para));
         return true;
@@ -26,6 +29,9 @@ public class BankAPI {
 
     // create saving account
     public boolean addAccount(SavingAccountInfo para) {
+    	if(para == null) {
+    		return false;
+    	}
         AbstractAccountFactory<SavingAccount, SavingAccountInfo> factory = SavingAccountFactory.getInstance();
         AccountList.addAccount(factory.createAccount(para));
         return true;
@@ -33,6 +39,9 @@ public class BankAPI {
 
     // create foreign currency account
     public boolean addAccount(ForeignCurrencyAccountInfo para) {
+    	if(para == null) {
+    		return false;
+    	}
         AbstractAccountFactory<ForeignCurrencyAccount, ForeignCurrencyAccountInfo> factory = ForeignCurrencyAccountFactory.getInstance();
         AccountList.addAccount(factory.createAccount(para));
         return true;
