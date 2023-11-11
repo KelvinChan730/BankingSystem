@@ -3,7 +3,6 @@ package test;
 import main.account.Account;
 import main.account.factory.AccountInfo;
 import main.bank.Bank;
-import main.bank.BankAPI;
 import main.bank.operation.TransferOperation;
 import main.db.AccountListSequencer;
 import org.junit.jupiter.api.Test;
@@ -17,7 +16,6 @@ public class TransferTest {
     @Test
     public void testDeposit_NormalCase() {
         // add account
-        String accNo1 = AccountListSequencer.getInstance().getSequence();
         AccountInfo accInfo1 = new AccountInfo("Jacky1", "123456", "12345678");
         Account acc1 = TestHelper.createTestAccount(accInfo1);
 

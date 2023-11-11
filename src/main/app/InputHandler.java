@@ -143,7 +143,7 @@ public class InputHandler {
 		return intInput;
 	}
 
-	public int promptInitialOption() throws IOFunctionException {
+	public int promptPreLoginOption() throws IOFunctionException {
 		view.display( "\nSelect an option\n"
 					+ "Menu:\n"
 					+ "1. login\n"

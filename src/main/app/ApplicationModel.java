@@ -4,7 +4,11 @@ import main.account.BaseAccount;
 // import main.account.factory.AccountInfo;
 // import main.bank.Bank;
 import main.bank.BankAPI;
-import main.constant.OperationType;
+import main.bank.operation.AccountCreationOperationReturn;
+import main.bank.operation.LoginOperationReturn;
+import main.bank.operation.OperationReturn;
+import main.constant.PostLoginOperationType;
+import main.constant.PreLoginOperationType;
 
 public class ApplicationModel {
 	private BankAPI bank = new BankAPI();
@@ -14,76 +18,68 @@ public class ApplicationModel {
 
 	}
 
-	// function to simulate loading existing records
-	// public void loadRecords() {
-	// 	AccountInfo para1 = new AccountInfo("John", "135791", "12345678");
-	// 	Bank.addAccount(para1);
-	// 	AccountInfo para2 = new AccountInfo("Jane", "123456", "98765432");
-	// 	Bank.addAccount(para2);
-	// }
-
-	// setup application
-	// public ApplicationModel setup() {
-	// 	loadRecords();
-	// 	return this;
-	// }
-
 	public void run() {
 		boolean isContinue = true;
-		while(isContinue){
-			int input = controller.showInitialMenu();
-			switch (input) {
-				case 1:
-				boolean isContinue2 = true;
-				BaseAccount userAcc = bank.selectOperation(OperationType.LOGIN);
-				while (isContinue2) {
-					int input2 = controller.showMenu();
-					switch (input2) {
+		while (isContinue) {
+			OperationReturn preLoginOpReturn;
+			int preloginOp = controller.showPreLoginMenu();
+			switch (preloginOp) {
+			case 1:
+				preLoginOpReturn = bank.operatePreLogin(PreLoginOperationType.LOGIN);
+				BaseAccount ac = ((LoginOperationReturn)preLoginOpReturn).ac;
+				// while is logged in
+				while (preLoginOpReturn.success && ac != null) {
+					int postloginOp = controller.showMenu();
+					OperationReturn opReturn;
+					switch (postloginOp) {
 					case 1:
-						bank.selectOperation(OperationType.SHOWACCOUNTDETAIL, userAcc);
+						opReturn = bank.operatePostLogin(PostLoginOperationType.SHOW_DETAIL, ac);
 						break;
 					case 2:
-						bank.selectOperation(OperationType.WITHDRAW, userAcc);
+						opReturn = bank.operatePostLogin(PostLoginOperationType.WITHDRAW, ac);
 						break;
 					case 3:
-						bank.selectOperation(OperationType.DEPOSIT, userAcc);
+						opReturn = bank.operatePostLogin(PostLoginOperationType.DEPOSIT, ac);
 						break;
 					case 4:
-						bank.selectOperation(OperationType.TRANSFER, userAcc);
+						opReturn = bank.operatePostLogin(PostLoginOperationType.TRANSFER, ac);
 						break;
 					case 5:
-						bank.selectOperation(OperationType.LOAN, userAcc);
+						opReturn = bank.operatePostLogin(PostLoginOperationType.LOAN, ac);
 						break;
 					case 6:
-						bank.selectOperation(OperationType.PAYBACK, userAcc);
+						opReturn = bank.operatePostLogin(PostLoginOperationType.PAYBACK, ac);
 						break;
 					case 7:
-						bank.selectOperation(OperationType.ACCOUNT_DELETION, userAcc);
+						opReturn = bank.operatePostLogin(PostLoginOperationType.ACCOUNT_DELETION, ac);
 						break;
 					case 8:
-						isContinue2 = false;
-						break;
 					default:
-						isContinue2 = false;
+						opReturn = null;
+						ac = null; // log out
 						break;
 					}
+					if (opReturn.success) {
+						controller.display(String.format("The %d operation is successfull.", postloginOp)); // need operation name
+					} else {
+						controller.display("Operation failed.");
+					}
 				}
-					break;
-				case 2:
-					bank.selectOperation(OperationType.ACCOUNT_CREATION);
-					break;
-				case 3:
-					isContinue = false;
-					break;
-				default:
-					isContinue = false;
-					break;
+				break;
+			case 2:
+				AccountCreationOperationReturn acCreateReturn = (AccountCreationOperationReturn) bank.operatePreLogin(PreLoginOperationType.ACCOUNT_CREATION);
+				
+				break;
+			case 3:
+			default:
+				isContinue = false;
+				break;
 			}
 		}
 	}
 
 	public static void main(String[] args) {
 		ApplicationModel application = new ApplicationModel();
-		application/*setup()*/.run();
+		application.run();
 	}
 }

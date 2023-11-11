@@ -1,14 +1,11 @@
 package main.constant;
 
-public enum OperationType {
-    NONE,
-    LOGIN,
+public enum PostLoginOperationType implements IOperationType {
     WITHDRAW,
     DEPOSIT,
     TRANSFER,
     LOAN,
     PAYBACK,
-    ACCOUNT_CREATION,
     ACCOUNT_DELETION,
-    SHOWACCOUNTDETAIL;
+    SHOW_DETAIL;
 }

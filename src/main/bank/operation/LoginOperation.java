@@ -1,11 +1,11 @@
 package main.bank.operation;
 
 public class LoginOperation {
-    public String accNo;
+    public String acNo;
     public String password;
 
-    public LoginOperation(String accNo, String password) {
-        this.accNo = accNo;
+    public LoginOperation(String acNo, String password) {
+        this.acNo = acNo;
         this.password = password;
     }
 }

@@ -9,10 +9,16 @@ import main.account.factory.AccountInfo;
 import main.account.factory.BaseAccountInfo;
 import main.account.factory.ForeignCurrencyAccountInfo;
 import main.account.factory.SavingAccountInfo;
+import main.bank.operation.AccountCreationOperationReturn;
+import main.bank.operation.DetailedOperationReturn;
+import main.bank.operation.LoginOperationReturn;
+import main.bank.operation.OperationReturn;
 import main.bank.operation.TransferOperation;
 import main.constant.AccountType;
 import main.constant.Currency;
-import main.constant.OperationType;
+import main.constant.PostLoginOperationType;
+import main.constant.PreLoginOperationType;
+import main.db.AccountListSequencer;
 
 public class BankAPI {
     private String APIKey;
@@ -21,68 +27,66 @@ public class BankAPI {
         String APIKey = UUID.randomUUID().toString().replaceAll("_", "");
     }
 
-    public BaseAccount selectOperation(OperationType Type){
-        BaseAccount ac = null;
+    public OperationReturn operatePreLogin(PreLoginOperationType Type){
+        OperationReturn opReturn = new OperationReturn(false);
         switch (Type){
             case LOGIN:
-                ac = controller.keepLogin();
+                BaseAccount ac = controller.attempLogin();
+                opReturn = new LoginOperationReturn(ac != null, ac);
                 break;
             case ACCOUNT_CREATION: 
                 AccountType type = controller.showAccountOption();
                 BaseAccountInfo info = controller.createAccountInfo(type);
+                String acNo = AccountListSequencer.getInstance().getSequence();
+                boolean result = false;
                 switch (type) { // need improvement
                     case FOREIGN_CURRENCY:
-                        addAccount((ForeignCurrencyAccountInfo)info);
+                    	result = addAccount((ForeignCurrencyAccountInfo)info);
                         break;
                     case NORMAL:
-                        addAccount((AccountInfo)info);
+                    	result = addAccount((AccountInfo)info);
                         break;
                     case SAVING:
-                        addAccount((SavingAccountInfo)info);
+                    	result = addAccount((SavingAccountInfo)info);
                         break;
                     default:
                         break;
                 }
+                opReturn = new AccountCreationOperationReturn(result, acNo);
             default:
                 break;
         }
-        return ac;
+        return opReturn;
     }
 
-    public boolean selectOperation(OperationType Type, BaseAccount ac){
+    public OperationReturn operatePostLogin(PostLoginOperationType Type, BaseAccount ac){
+        OperationReturn opReturn = new OperationReturn(false);
         switch (Type){
-            case NONE:
-                break;
             case ACCOUNT_DELETION:
-                deleteAccount(ac);
-                break;
+                return new OperationReturn(deleteAccount(ac));
             case DEPOSIT:
             	BigDecimal depositAmount = controller.deposit(ac);
-				deposit(ac, depositAmount);
-                break;
+				return new OperationReturn(deposit(ac, depositAmount));
             case LOAN:
                 BigDecimal loanAmount = controller.loan();
-                loan(ac, loanAmount);
-                break;
+                return new OperationReturn(loan(ac, loanAmount));
             case PAYBACK:
             	String loanID = controller.payBack();
-				payBack(ac, loanID);
-                break;
-            case SHOWACCOUNTDETAIL:
-                getAccountDetail(ac);
-                break;
+				return new OperationReturn(payBack(ac, loanID));
+            case SHOW_DETAIL:
+            	String detail = getAccountDetail(ac);
+            	boolean success = (detail != null && !detail.isBlank());
+                return new DetailedOperationReturn(success, detail);
             case TRANSFER:
                 TransferOperation transferOp = controller.transfer(ac);
-                transfer(ac, transferOp);
-                break;
+                return new OperationReturn(transfer(ac, transferOp));
             case WITHDRAW:
                 BigDecimal withdrawAmount = controller.withdraw(ac);
-                withdraw(ac, withdrawAmount);
-                break;
+                return new OperationReturn(withdraw(ac, withdrawAmount));
             default:
-                break;
+            	break;
         }
-        return true;
+        return opReturn;
     }
 
     private String getAccountDetail(BaseAccount acc) {

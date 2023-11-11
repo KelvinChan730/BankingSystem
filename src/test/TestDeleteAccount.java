@@ -2,7 +2,6 @@ package test;
 
 import java.math.BigDecimal;
 
-import main.account.Account;
 import org.junit.jupiter.api.Test;
 
 import main.account.factory.AccountInfo;
@@ -24,7 +23,7 @@ public class TestDeleteAccount {
 		String password = "123456";
 		AccountInfo accInfo = new AccountInfo("Jacky", password, "12345678");
 		String accNo = AccountListSequencer.getInstance().getSequence();
-		Account account = TestHelper.createTestAccount(accInfo);
+		TestHelper.createTestAccount(accInfo);
 
 		boolean result = Bank.deleteAccount(accNo, "123456");
 		assertTrue(result);
@@ -36,7 +35,7 @@ public class TestDeleteAccount {
 		// add account
 		AccountInfo accInfo = new AccountInfo("Jacky", "123456", "12345678");
 		String accNo = AccountListSequencer.getInstance().getSequence();
-		Account account = TestHelper.createTestAccount(accInfo);
+		TestHelper.createTestAccount(accInfo);
 
 		boolean result = Bank.deleteAccount(accNo, "kkkkk");
 		assertFalse(result);
@@ -48,8 +47,7 @@ public class TestDeleteAccount {
 		// add account
 		String password = "123456";
 		AccountInfo accInfo = new AccountInfo("Jacky", password, "12345678");
-		String accNo = AccountListSequencer.getInstance().getSequence();
-		Account account = TestHelper.createTestAccount(accInfo);
+		TestHelper.createTestAccount(accInfo);
 
 		boolean result = Bank.deleteAccount("9999", password);
 		assertFalse(result);
@@ -58,8 +56,6 @@ public class TestDeleteAccount {
 	@Test
 	// test delete saving account
 	public void testDeleteAccount04() {
-		//BankAPI bank = new BankAPI();//
-		// get next sequence
 		String expectedSeq = AccountListSequencer.getInstance().getSequence();
 		String username = "Jacky";
 		String password = "123456";
@@ -75,8 +71,6 @@ public class TestDeleteAccount {
 	@Test
 	// test delete saving account
 	public void testDeleteAccount05() {
-		//BankAPI bank = new BankAPI();//
-		// get next sequence
 		String expectedSeq = AccountListSequencer.getInstance().getSequence();
 		String username = "Jacky";
 		String password = "123456";
@@ -92,9 +86,6 @@ public class TestDeleteAccount {
 	@Test
 	// test delete saving account
 	public void testDeleteAccount06() {
-		//BankAPI bank = new BankAPI();//
-		// get next sequence
-		// String expectedSeq = AccountListSequencer.getInstance().getSequence();
 		String username = "Jacky";
 		String password = "123456";
 		String phoneNo = "12345678";
@@ -109,8 +100,6 @@ public class TestDeleteAccount {
 	@Test
 	// test delete foreign currency account
 	public void testDeleteAccount07() {
-		//BankAPI bank = new BankAPI();//
-		// get next sequence
 		String expectedSeq = AccountListSequencer.getInstance().getSequence();
 		String username = "Jacky";
 		String password = "123456";
@@ -126,8 +115,6 @@ public class TestDeleteAccount {
 	@Test
 	// test delete foreign currency account
 	public void testDeleteAccount08() {
-		//BankAPI bank = new BankAPI();//
-		// get next sequence
 		String expectedSeq = AccountListSequencer.getInstance().getSequence();
 		String username = "Jacky";
 		String password = "123456";
@@ -143,9 +130,6 @@ public class TestDeleteAccount {
 	@Test
 	// test delete foreign currency account
 	public void testDeleteAccount09() {
-		//BankAPI bank = new BankAPI();//
-		// get next sequence
-		// String expectedSeq = AccountListSequencer.getInstance().getSequence();
 		String username = "Jacky";
 		String password = "123456";
 		String phoneNo = "12345678";

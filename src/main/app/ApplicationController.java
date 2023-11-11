@@ -57,11 +57,13 @@ public class ApplicationController {
 		return AccountList.findAccount(accNo);
 	}
 
-	public BaseAccount keepLogin(){
-		BaseAccount ac;
+	public BaseAccount attempLogin(){
+		BaseAccount ac = null;
+		int attemp = 0;
 		do {
 			ac = login();
-		} while (ac==null);
+			attemp++;
+		} while (ac == null && attemp < 3);
 		return ac;
 	}
 
@@ -77,10 +79,10 @@ public class ApplicationController {
 	}
 
 	
-	public int showInitialMenu() {
+	public int showPreLoginMenu() {
 		int input = 0;
 		try {
-			input = inputHandler.promptInitialOption();
+			input = inputHandler.promptPreLoginOption();
 		} catch (IOFunctionException ioex) {
 			view.display("IOFunctionException thrown  :" + ioex.getMessage());
 		}
