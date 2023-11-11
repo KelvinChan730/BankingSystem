@@ -1,3 +1,5 @@
+package test;
+
 import main.utility.FormatVerifier;
 import org.junit.jupiter.api.Test;
 
