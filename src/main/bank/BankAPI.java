@@ -49,8 +49,8 @@ public class BankAPI {
 
     // delete bank account
     public boolean deleteAccount(String accNo, String password) {
-        AccountList.deleteAccount(accNo, password);
-        return !AccountList.hasAccount(accNo);
+        return AccountList.deleteAccount(accNo, password);
+        //return !AccountList.hasAccount(accNo);
     }
 
     public boolean withdraw(BaseAccount account, BigDecimal amount) {

@@ -29,8 +29,14 @@ public class AccountList {
 		return null;
 	}
 
-	public static void deleteAccount(String accNo, String password) {
-		String key = accNo;
-		accountList.remove(key);
+	public static boolean deleteAccount(String accNo, String password) {
+		if (accountList.containsKey(accNo)) {
+			BaseAccount acc = accountList.get(accNo);
+			if (acc.getPassword().equals(password)) {
+				accountList.remove(accNo);
+				return true;
+			}
+		}
+		return false;
 	}
 }
