@@ -8,12 +8,11 @@ import java.io.ByteArrayInputStream;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import org.junit.Test;
-
 import main.app.ApplicationView;
 import main.app.InputHandler;
 import main.constant.Currency;
 import main.exception.IOFunctionException;
+import org.junit.jupiter.api.Test;
 
 public class TestInputHandler {
 	@Test
