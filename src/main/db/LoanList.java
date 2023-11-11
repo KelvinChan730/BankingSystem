@@ -7,7 +7,7 @@ import java.util.Map;
 import main.account.BaseAccount;
 import main.account.Loan;
 
-public class LoanList extends SequencedRecordCreator {
+public class LoanList extends Sequencer {
 	private static LoanList instance = null;
 	private Map<String, Loan> loadRecordList = new HashMap<>();
 
@@ -26,7 +26,7 @@ public class LoanList extends SequencedRecordCreator {
 
 	// add loan record
 	public void addLoanRecord(Loan loan) {
-		String loanId = getSequence();
+		String loanId = getAndIncrementSequence();
 		loadRecordList.put(loanId, loan);
 		BaseAccount user = AccountList.findAccount(loan.getAccountId());
 		user.addLoanRecordId(loanId);

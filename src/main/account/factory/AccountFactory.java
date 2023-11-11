@@ -16,7 +16,7 @@ public class AccountFactory extends AbstractAccountFactory<Account, AccountInfo>
 
 	@Override
 	public Account createAccount(AccountInfo accInfo) {
-		String accNo = this.getSequence();
+		String accNo = sequencer.getAndIncrementSequence();
 		return new Account(accNo, accInfo);
 	}
 }

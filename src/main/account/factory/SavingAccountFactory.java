@@ -16,7 +16,7 @@ public class SavingAccountFactory extends AbstractAccountFactory<SavingAccount, 
 
 	@Override
 	public SavingAccount createAccount(SavingAccountInfo accInfo) {
-		String accNo = this.getSequence();
+		String accNo = sequencer.getAndIncrementSequence();
 		return new SavingAccount(accNo, accInfo);
 	}
 }

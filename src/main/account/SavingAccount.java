@@ -14,10 +14,8 @@ public class SavingAccount extends BaseAccount implements IAccount {
 
 	public SavingAccount(String accNo, SavingAccountInfo accInfo) {
 		this.accNo = accNo;
-		this.accountInfo.owner = accInfo.owner;
 		this.balance = BigDecimal.ZERO;
-		this.accountInfo.password = accInfo.password;
-		this.accountInfo.phoneNo = accInfo.phoneNo;
+		this.accountInfo = accInfo;
 		this.targetAmount = accInfo.targetAmount;
 	}
 

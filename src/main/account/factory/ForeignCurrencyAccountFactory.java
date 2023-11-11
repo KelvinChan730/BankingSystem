@@ -16,7 +16,7 @@ public class ForeignCurrencyAccountFactory extends AbstractAccountFactory<Foreig
 
 	@Override
 	public ForeignCurrencyAccount createAccount(ForeignCurrencyAccountInfo accInfo) {
-		String accNo = this.getSequence();
+		String accNo = sequencer.getAndIncrementSequence();
 		return new ForeignCurrencyAccount(accNo, accInfo);
 	}
 }

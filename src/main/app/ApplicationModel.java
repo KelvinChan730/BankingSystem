@@ -3,7 +3,7 @@ package main.app;
 import main.account.BaseAccount;
 import main.account.ForeignCurrencyAccount;
 import main.account.factory.AccountInfo;
-import main.bank.Bank;
+import main.bank.BankAPI;
 import main.bank.operation.TransferOperation;
 import main.constant.Currency;
 import main.db.AccountList;
@@ -12,7 +12,7 @@ import main.utility.Authentication;
 import java.math.BigDecimal;
 
 public class ApplicationModel {
-	private Bank bank = new Bank();
+	private BankAPI bank = new BankAPI();
 	private ApplicationController controller = new ApplicationController();
 
 	public ApplicationModel() {
