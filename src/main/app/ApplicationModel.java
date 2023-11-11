@@ -1,6 +1,8 @@
 package main.app;
 
 import main.account.BaseAccount;
+// import main.account.factory.AccountInfo;
+// import main.bank.Bank;
 import main.bank.BankAPI;
 import main.constant.OperationType;
 
@@ -15,12 +17,12 @@ public class ApplicationModel {
 	// function to simulate loading existing records
 	// public void loadRecords() {
 	// 	AccountInfo para1 = new AccountInfo("John", "135791", "12345678");
-	// 	bank.addAccount(para1);
+	// 	Bank.addAccount(para1);
 	// 	AccountInfo para2 = new AccountInfo("Jane", "123456", "98765432");
-	// 	bank.addAccount(para2);
+	// 	Bank.addAccount(para2);
 	// }
 
-	// // setup application
+	// setup application
 	// public ApplicationModel setup() {
 	// 	loadRecords();
 	// 	return this;

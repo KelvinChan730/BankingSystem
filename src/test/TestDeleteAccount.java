@@ -47,7 +47,7 @@ public class TestDeleteAccount {
 	// test delete normal account
 	public void testDeleteAccount03() {
 		//BankAPI bank = new BankAPI();//
-		String expectedSeq = AccountListSequencer.getInstance().getSequence();
+		// String expectedSeq = AccountListSequencer.getInstance().getSequence();
 		String username = "Jacky";
 		String password = "123456";
 		String phoneNo = "12345678";
@@ -96,7 +96,7 @@ public class TestDeleteAccount {
 	public void testDeleteAccount06() {
 		//BankAPI bank = new BankAPI();//
 		// get next sequence
-		String expectedSeq = AccountListSequencer.getInstance().getSequence();
+		// String expectedSeq = AccountListSequencer.getInstance().getSequence();
 		String username = "Jacky";
 		String password = "123456";
 		String phoneNo = "12345678";
@@ -147,7 +147,7 @@ public class TestDeleteAccount {
 	public void testDeleteAccount09() {
 		//BankAPI bank = new BankAPI();//
 		// get next sequence
-		String expectedSeq = AccountListSequencer.getInstance().getSequence();
+		// String expectedSeq = AccountListSequencer.getInstance().getSequence();
 		String username = "Jacky";
 		String password = "123456";
 		String phoneNo = "12345678";
